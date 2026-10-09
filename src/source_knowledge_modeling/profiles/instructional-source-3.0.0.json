@@ -1,0 +1,12 @@
+{
+  "id": "instructional-source",
+  "version": "3.0.0",
+  "purpose": "Source-faithful discourse and instructional modeling with ordered occurrences and auditable interpretation",
+  "element_kinds": ["assertion", "action", "condition", "exception", "reason", "parameter", "example", "unresolved"],
+  "relation_types": ["conditions", "exception_to", "replaces", "supports", "precedes", "quantifies", "example_of", "qualifies", "causes", "contrasts_with", "elaborates"],
+  "origin_types": ["source_claim", "source_example", "project_interpretation", "unresolved"],
+  "relation_bases": ["explicit", "inferred_from_source", "project_interpretation", "unresolved"],
+  "modality_types": ["asserted", "recommended", "possible", "hypothetical", "negated", "unresolved"],
+  "information_statuses": ["modeled", "gap", "uncertain", "not_stated", "not_applicable"],
+  "rules": ["IS3-01", "IS3-02", "IS3-03", "IS3-04", "IS3-05", "IS3-06", "IS3-07", "IS3-08", "IS3-09", "IS3-10", "IS3-11"]
+}

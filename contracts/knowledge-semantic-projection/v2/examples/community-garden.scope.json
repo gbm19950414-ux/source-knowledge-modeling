@@ -1,0 +1,5 @@
+{
+  "included_locators": ["line:3", "line:4", "line:5"],
+  "context_locators": ["line:1", "line:2"],
+  "description": "Synthetic community-garden watering instructions and explicit missing amount"
+}

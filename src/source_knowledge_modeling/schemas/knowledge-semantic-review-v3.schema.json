@@ -1,0 +1,128 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://source-knowledge-modeling.local/contracts/knowledge-semantic-review/v3/schema.json",
+  "title": "Semantic review ledger v3",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "artifact_id",
+    "base_revision_id",
+    "draft_sha256",
+    "quality_report_sha256",
+    "decisions"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "knowledge-semantic-review/v3"
+    },
+    "artifact_id": {
+      "$ref": "#/$defs/id"
+    },
+    "base_revision_id": {
+      "$ref": "#/$defs/id"
+    },
+    "draft_sha256": {
+      "$ref": "#/$defs/sha"
+    },
+    "quality_report_sha256": {
+      "$ref": "#/$defs/sha"
+    },
+    "decisions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/decision"
+      }
+    }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+    },
+    "sha": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "proposal_id",
+        "base_revision_id",
+        "decision",
+        "reviewer",
+        "checked_anchor_keys",
+        "checked_region_keys",
+        "check_method",
+        "note",
+        "proposal_sha256",
+        "dependency_sha256",
+        "rule_ids",
+        "quality_report_sha256",
+        "reviewed_at"
+      ],
+      "properties": {
+        "proposal_id": {
+          "$ref": "#/$defs/id"
+        },
+        "base_revision_id": {
+          "$ref": "#/$defs/id"
+        },
+        "decision": {
+          "enum": [
+            "accept",
+            "reject",
+            "pending"
+          ]
+        },
+        "reviewer": {
+          "type": "string",
+          "minLength": 1
+        },
+        "checked_anchor_keys": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/sha"
+          }
+        },
+        "checked_region_keys": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/sha"
+          }
+        },
+        "check_method": {
+          "enum": [
+            "original_visual",
+            "source_text"
+          ]
+        },
+        "note": {
+          "type": "string"
+        },
+        "proposal_sha256": {
+          "$ref": "#/$defs/sha"
+        },
+        "dependency_sha256": {
+          "$ref": "#/$defs/sha"
+        },
+        "rule_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          }
+        },
+        "quality_report_sha256": {
+          "$ref": "#/$defs/sha"
+        },
+        "reviewed_at": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

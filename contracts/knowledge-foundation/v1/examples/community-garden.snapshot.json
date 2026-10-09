@@ -1,0 +1,25 @@
+{
+  "schema_version": "knowledge-foundation-transcription/v1",
+  "units": [
+    {
+      "locator": "line:1",
+      "text": "社区花园浇水说明"
+    },
+    {
+      "locator": "line:2",
+      "text": "每周六，协调员查看每块苗床的表土。"
+    },
+    {
+      "locator": "line:3",
+      "text": "若表土干燥且未来六小时没有降雨预报，志愿者浇水。"
+    },
+    {
+      "locator": "line:4",
+      "text": "若预计下雨，通常推迟浇水；若叶片萎蔫而表土仍干燥，则由协调员现场决定。"
+    },
+    {
+      "locator": "line:5",
+      "text": "这份说明没有给出单次浇水量，也没有证明浇水导致植株生长。"
+    }
+  ]
+}

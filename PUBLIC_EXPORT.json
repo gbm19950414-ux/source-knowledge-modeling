@@ -1,0 +1,409 @@
+{
+  "schema": "public-export/v1",
+  "plan_id": "pd-20261009-project-inventory-naming-github-publication",
+  "upstream_project": "source_knowledge_modeling",
+  "upstream_commit": "fdd3a7b0d2a4e18df47b8044669f93439d4a62e8",
+  "source_files": [
+    {
+      "path": "contracts/knowledge-foundation/v1/examples/community-garden.snapshot.json",
+      "source_sha256": "751e725e1b0c174e5c742389bf06175ebcade599660264c344f2bb1ce8d7d42f"
+    },
+    {
+      "path": "contracts/knowledge-foundation/v1/examples/community-garden.txt",
+      "source_sha256": "90b279d44bdb0460ae61bc0022a3e3bb7b539cbab0acdbf07f98cd524b8b6dd4"
+    },
+    {
+      "path": "contracts/knowledge-foundation/v1/examples/community-garden.v1.json",
+      "source_sha256": "dfc280179f0f39d08315fb7f99aa6a8b90a0a8b5644ad665233e7580a6cc1731"
+    },
+    {
+      "path": "contracts/knowledge-foundation/v1/schema-ids.json",
+      "source_sha256": "8f10d39e81a0b7311de4b6dff84270662cc58738e5ee5ee7f3152b65c86851aa"
+    },
+    {
+      "path": "contracts/knowledge-semantic-projection/v2/README.md",
+      "source_sha256": "dc44b76e4c36b636cae302bb980021b626a6e144f9a4957fd810fd2d3b8e1f5a"
+    },
+    {
+      "path": "contracts/knowledge-semantic-projection/v2/examples/community-garden.scope.json",
+      "source_sha256": "8d01e213ce89093c35e96d154287b1ad47e455d41a1b6fb0550bbc98c57aa50e"
+    },
+    {
+      "path": "contracts/knowledge-transcription-corrections/v1/README.md",
+      "source_sha256": "7a9196888bd8b207b279971456efd545e1247f4783ce9e2e763eed8c8b8a4c58"
+    },
+    {
+      "path": "contracts/semantic-discourse/v1/README.md",
+      "source_sha256": "6202256e86b490415864bac4f60581d019e63176345a6a18cd9bc868701ce2ab"
+    },
+    {
+      "path": "contracts/semantic-discourse/v1/examples/garden.draft.json",
+      "source_sha256": "d634d3a817f60772f834a4757291936a8f5127261b31dae28d41099ef1d82047"
+    },
+    {
+      "path": "contracts/semantic-discourse/v1/examples/garden.export.json",
+      "source_sha256": "f811b76a040f6ace50d3a60de0f64c8fae6a846b42a59d014beef9ed5c018889"
+    },
+    {
+      "path": "contracts/semantic-discourse/v2/README.md",
+      "source_sha256": "fc7c0a997ff9d1bd839f87e70da75d4c7788b6692e546942058e502a2bfde561"
+    },
+    {
+      "path": "contracts/semantic-discourse/v2/examples/garden.draft.json",
+      "source_sha256": "d03c9dfed34b6612ad94dedb490aff1ab89ce61bd3388c2b3143c1a10a817e55"
+    },
+    {
+      "path": "contracts/semantic-discourse/v3/examples/garden.document-map.json",
+      "source_sha256": "3c38c56daa399785d353407c8b4a9673a03b4081661fe31712e5127b39b2972d"
+    },
+    {
+      "path": "pyproject.toml",
+      "source_sha256": "ab6f4c65321cb1da30e3dfe22f8a8220fd60511ba07ba98eb3960530c09df44f"
+    },
+    {
+      "path": "src/source_knowledge_modeling/__init__.py",
+      "source_sha256": "7de07d49b7ba54d468f1966b80070db39a8f76a7a7103a99c0199e05d5bb9a74"
+    },
+    {
+      "path": "src/source_knowledge_modeling/cli.py",
+      "source_sha256": "683acef0d3f2a1ff7763bc89aa864a3c5964db2b181f73b5494e0fc6fe6617bd"
+    },
+    {
+      "path": "src/source_knowledge_modeling/core.py",
+      "source_sha256": "20625a527b8ffe9d6993b3b63501c4e3622a72a5614582f712fc7e6b3fd05ffb"
+    },
+    {
+      "path": "src/source_knowledge_modeling/export.py",
+      "source_sha256": "393edf76450b025578bcaf2f1325e7f8dcfb9ae0cbe93c82b6d04edd9c6aeb95"
+    },
+    {
+      "path": "src/source_knowledge_modeling/ingest.py",
+      "source_sha256": "173cf0d66d49015d4f144ad1a6ef37d5e6d541b1e91306fffe2ae6a0de95b075"
+    },
+    {
+      "path": "src/source_knowledge_modeling/organize.py",
+      "source_sha256": "0f84ca4912632ae9932e47e31760d79db7004e627799a59deeae42ff6692df97"
+    },
+    {
+      "path": "src/source_knowledge_modeling/organize_v3.py",
+      "source_sha256": "7d5f49933e25f4dc989506463ff990c71ec14484cd5d8c2ff4046d2d594773de"
+    },
+    {
+      "path": "src/source_knowledge_modeling/organize_v4.py",
+      "source_sha256": "eac155ad6bcce492d9f82eb1965c5a45db7b37cb1b092964a1a0055228e84b0c"
+    },
+    {
+      "path": "src/source_knowledge_modeling/production_entry.py",
+      "source_sha256": "072fdb63937423301a79da74b193986bdd6ae80c84499d190c6335256821f83d"
+    },
+    {
+      "path": "src/source_knowledge_modeling/profiles/instructional-source-1.0.0.json",
+      "source_sha256": "ffde2c9b55732dc2b42ff6dce8bf4824a805ec4b1144c8905ad423e3e9e95dbc"
+    },
+    {
+      "path": "src/source_knowledge_modeling/profiles/instructional-source-1.0.0.md",
+      "source_sha256": "c8f8032bcfc698ceff71fc2f0fcadd2d79e94aebdf2df1d546ea67cc8919c5b9"
+    },
+    {
+      "path": "src/source_knowledge_modeling/profiles/instructional-source-2.0.0.json",
+      "source_sha256": "161bd586d4216e8444c598ffc2a9281cc2649d337f78b4f9557f2efa05c537ba"
+    },
+    {
+      "path": "src/source_knowledge_modeling/profiles/instructional-source-2.0.0.md",
+      "source_sha256": "f4eb03592826f24c5b71c1fe02dccf478c86fa0806d2233586d23f4beb9ebf71"
+    },
+    {
+      "path": "src/source_knowledge_modeling/profiles/instructional-source-3.0.0.json",
+      "source_sha256": "01318990bfccbd294ca8c156181f08055d3d8228c10de29554d016af5d9c0ad5"
+    },
+    {
+      "path": "src/source_knowledge_modeling/profiles/instructional-source-3.0.0.md",
+      "source_sha256": "1adc7bdd92599f22ef6f063f766cb2a9c3b24de64063b713215bbf7589c3da80"
+    },
+    {
+      "path": "src/source_knowledge_modeling/reading_view.py",
+      "source_sha256": "ac7e4877bbbf3b9b89b1baee6d2445682dd4f494dd245519005f25c1f952b161"
+    },
+    {
+      "path": "src/source_knowledge_modeling/reading_view_v2.py",
+      "source_sha256": "2dd5c23d2ffe98e1ebc10c855d7df1cf5ab215a046d4e2141e94d6715d36d480"
+    },
+    {
+      "path": "src/source_knowledge_modeling/reading_view_v3.py",
+      "source_sha256": "12e4d10224f0df15fe9f358f74c50a3891f3761bb95ac321995f70ce671a404c"
+    },
+    {
+      "path": "src/source_knowledge_modeling/resources/content-types-v1.json",
+      "source_sha256": "f836fbfa6ee94c40733ddcb45903f8c600b0bac1660cf378acf1ec8b22fa2eec"
+    },
+    {
+      "path": "src/source_knowledge_modeling/resources/humanizer/LICENSE",
+      "source_sha256": "4ac4810254ab36d45419141aeb8e69bf50652cfafe5b2dab947d06d44e5cbf96"
+    },
+    {
+      "path": "src/source_knowledge_modeling/resources/humanizer/SKILL.md",
+      "source_sha256": "0612f1dfb1672b0ea9b97e139bf1f06cabe98d8b27424fe8ff01e1fb4cc99cad"
+    },
+    {
+      "path": "src/source_knowledge_modeling/resources/humanizer/provenance.json",
+      "source_sha256": "ecad627e8a5b822d639e21ba4223579b67436618c398fdd23150db42f0b78dc2"
+    },
+    {
+      "path": "src/source_knowledge_modeling/review.py",
+      "source_sha256": "99c020025772c1ca28b7a77b68ecedef52417d223acee51d0efb5bf2ee3ad97c"
+    },
+    {
+      "path": "src/source_knowledge_modeling/schemas/knowledge-foundation.schema.json",
+      "source_sha256": "51e3e5ebf3157285a99f00d3dc14aca9f989eaa739b3ae18bbaf1f7b66c7b2d1"
+    },
+    {
+      "path": "src/source_knowledge_modeling/schemas/knowledge-semantic-assessment-reuse-v1.schema.json",
+      "source_sha256": "951ad4cd63df60a4fabf13ea084c441174387336670f2a9b1e7eba5ca4cd52e8"
+    },
+    {
+      "path": "src/source_knowledge_modeling/schemas/knowledge-semantic-assessment-v1.schema.json",
+      "source_sha256": "0586e926364a4c015727ab170f4d7f761e82cf9f3b098d07fb928f095a0eb6c0"
+    },
+    {
+      "path": "src/source_knowledge_modeling/schemas/knowledge-semantic-dependency-certificate-v1.schema.json",
+      "source_sha256": "f42b53973b12a2d19439d2cfe6abd00cdc83fc01119ce9a522e383c4dc85fa19"
+    },
+    {
+      "path": "src/source_knowledge_modeling/schemas/knowledge-semantic-drafts-v3.schema.json",
+      "source_sha256": "3e99160e88eb580ac2be62aedeb10ba84d61a3606d636877d9546282a5df96a4"
+    },
+    {
+      "path": "src/source_knowledge_modeling/schemas/knowledge-semantic-expectations-v1.schema.json",
+      "source_sha256": "d0092680f609e1321b30ac2cf41d48f48f2d310aef4cf8373bfacddcd3540a6a"
+    },
+    {
+      "path": "src/source_knowledge_modeling/schemas/knowledge-semantic-projection-v2.schema.json",
+      "source_sha256": "d67626e060210e0cb9df9b436907146277563065d04f243d64a562a5da78351c"
+    },
+    {
+      "path": "src/source_knowledge_modeling/schemas/knowledge-semantic-projection-v3.schema.json",
+      "source_sha256": "51cd9cea7a6cdc18946d2591e47d622e9a364e4c4534b4d25017c919d1548e59"
+    },
+    {
+      "path": "src/source_knowledge_modeling/schemas/knowledge-semantic-projection.schema.json",
+      "source_sha256": "5a28a9f83a6796206f734e208529e3b25a5ef17330b74c18188a97c94cc04c31"
+    },
+    {
+      "path": "src/source_knowledge_modeling/schemas/knowledge-semantic-quality-v1.schema.json",
+      "source_sha256": "6834bcecd023c73627483011258dd29d51e9cddff8fcd96c1a95bb5b7726160c"
+    },
+    {
+      "path": "src/source_knowledge_modeling/schemas/knowledge-semantic-review-v3.schema.json",
+      "source_sha256": "beeaf434f922b1f647895497c5ec625b27a9c819f689b96d5d7b7ff9429ab682"
+    },
+    {
+      "path": "src/source_knowledge_modeling/schemas/knowledge-semantic-run-v1.schema.json",
+      "source_sha256": "61511e96284dea4d86be382c86332f26674ffb0ed6a67195e2a676676b58b807"
+    },
+    {
+      "path": "src/source_knowledge_modeling/schemas/knowledge-semantic-work-package-v2.schema.json",
+      "source_sha256": "b14a29a7b2cd2758ef073269ed8df7fd8eb8697e75cb9b5b524ad6abcf2cf8a3"
+    },
+    {
+      "path": "src/source_knowledge_modeling/schemas/knowledge-source-audit-v1.schema.json",
+      "source_sha256": "5e77550bbcec36c12db5d0e4a94b116cbf7b2c31558dc5970ad6f0444969d3e3"
+    },
+    {
+      "path": "src/source_knowledge_modeling/schemas/knowledge-transcription-corrections-v1.schema.json",
+      "source_sha256": "f8b5065a144c7b25adf469ea311ac0f85e09319d1b2443a655703c4086074b35"
+    },
+    {
+      "path": "src/source_knowledge_modeling/schemas/semantic-discourse-draft-v1.schema.json",
+      "source_sha256": "0b172f4748ce60d96e3ea549bf7a9da7a3e38c93280d1bc3e2cd4709503f96c4"
+    },
+    {
+      "path": "src/source_knowledge_modeling/schemas/semantic-discourse-draft-v2.schema.json",
+      "source_sha256": "28293572b81fb9d66296090585b877f970105087a80e7a0e94cbda18a9c75c66"
+    },
+    {
+      "path": "src/source_knowledge_modeling/schemas/semantic-discourse-draft-v3.schema.json",
+      "source_sha256": "a0c997b2f42dbd6707020c2718eea8c33242899b4a0f0b545cbbb8564eac3109"
+    },
+    {
+      "path": "src/source_knowledge_modeling/schemas/semantic-discourse-draft-v4.schema.json",
+      "source_sha256": "2baf6989560cc09c15ee6c343741e3d90bfdb41efcb2efa9d5fd96b2e9f514eb"
+    },
+    {
+      "path": "src/source_knowledge_modeling/schemas/semantic-discourse-model-v1.schema.json",
+      "source_sha256": "1fc5f3ce86030b7ccfdc8afdcb838de88e719df433b7f7a13b4c3140d7344bb9"
+    },
+    {
+      "path": "src/source_knowledge_modeling/schemas/semantic-discourse-model-v2.schema.json",
+      "source_sha256": "1d69678763cf8564b7597a57976e2152df0e4e0dccdf75054b97c53b135ff1d2"
+    },
+    {
+      "path": "src/source_knowledge_modeling/schemas/semantic-discourse-model-v3.schema.json",
+      "source_sha256": "117b29c1045c07871ed4b7e3363ae353b9364129085d3da0c6191c85040aea15"
+    },
+    {
+      "path": "src/source_knowledge_modeling/schemas/semantic-discourse-model-v4.schema.json",
+      "source_sha256": "42a062c583992bfb5a5e9e078361af72fe2fc3e31100bf003711a5164cad7b73"
+    },
+    {
+      "path": "src/source_knowledge_modeling/schemas/semantic-discourse-review-v1.schema.json",
+      "source_sha256": "b9a1660633d0f3499b1730b1727167ed803c5de8fd78be2ea10bcbedcc6ea0e2"
+    },
+    {
+      "path": "src/source_knowledge_modeling/semantic.py",
+      "source_sha256": "e88c46fc6fa6a9af22bd83bfdd237c8888feea084b91b323caf30fdc98a0be9f"
+    },
+    {
+      "path": "src/source_knowledge_modeling/semantic_dependency_cert.py",
+      "source_sha256": "ab57c9fde6ffdee84c88fc24566b5b587bbf8769e4c108e8e30803aa1e7b1acf"
+    },
+    {
+      "path": "src/source_knowledge_modeling/semantic_v2.py",
+      "source_sha256": "6b46f1b75a43a889e226aed7011494f05d7346d4726a7bda9eccf8eff0339320"
+    },
+    {
+      "path": "src/source_knowledge_modeling/semantic_v3.py",
+      "source_sha256": "476bf2239b894581d483bb172f64722f2de51dda3ee242cc38c41f3ea09ce465"
+    },
+    {
+      "path": "src/source_knowledge_modeling/semantic_workflow.py",
+      "source_sha256": "2ab000525969e603fa2ff0eb096853ce88a11af3e92ed12d9d8964a0f8670ae9"
+    },
+    {
+      "path": "src/source_knowledge_modeling/templates/discourse-modeling-v1.md",
+      "source_sha256": "aa540003381fb06ab6fe51b29c7c4bce618e1c1b829b03abdabdb515c1dbf798"
+    },
+    {
+      "path": "src/source_knowledge_modeling/templates/discourse-modeling-v2.md",
+      "source_sha256": "9c0df376184cdb58dcba89a89ed1d2c85fb6f2148496dd7c970f162e51a9c95b"
+    },
+    {
+      "path": "src/source_knowledge_modeling/templates/discourse-modeling-v3.md",
+      "source_sha256": "3bf479303fdb4b075704bc33168bd6e083a59ebc04db68a2ba20fa84d081aa30"
+    },
+    {
+      "path": "src/source_knowledge_modeling/templates/discourse-modeling-v4.md",
+      "source_sha256": "9f7d3d852d48ae13bc98bfb556e573e624c4a77c6a0f655c3bd8152f4c4bd8d2"
+    },
+    {
+      "path": "src/source_knowledge_modeling/templates/semantic-modeling-v3.md",
+      "source_sha256": "ba7b3682202fbe1f46f443f0d1c5b82c56a5c6b192c1e72f8002dcb893238bef"
+    },
+    {
+      "path": "src/source_knowledge_modeling/templates/semantic-reading-view.html",
+      "source_sha256": "7f1a3675f5abfaf4a921f8d2ba63a4818bab038d6ea7ef5933d24fdc89797ea2"
+    },
+    {
+      "path": "src/source_knowledge_modeling/templates/semantic-review-v3.md",
+      "source_sha256": "145241a901d5596787891b9fdb375f1b7b33ff021ce54ac3af31617a3cc9a2b8"
+    },
+    {
+      "path": "src/source_knowledge_modeling/templates/transcription-corrections.md",
+      "source_sha256": "869e3afb5e50681eed2b7fa0537e64a2f93f2f88d7d01c935059c16f2abec7f4"
+    },
+    {
+      "path": "src/source_knowledge_modeling/transcription_revision.py",
+      "source_sha256": "8028db666e8cab20101206a46621692fecab53e5b9490b086b0322d41b5cfa0e"
+    },
+    {
+      "path": "tests/test_input_preflight.py",
+      "source_sha256": "43af6d9e6c9e0cb804e742f9d90359a3e3521ae246a401c4be0bc106b2105e7e"
+    },
+    {
+      "path": "tests/test_mineru_cache.py",
+      "source_sha256": "df7d2df7f21b9b439d835703f5845a331630649e52b92821c914c39a766d48d1"
+    },
+    {
+      "path": "tests/test_organize.py",
+      "source_sha256": "d34922e82c0e93a9c3001c22087e734d089eb7db175a9afa6b249df532d6204d"
+    },
+    {
+      "path": "tests/test_organize_v2.py",
+      "source_sha256": "4cccd313170c7a914a3224f0205260f6caf635b42b5b251694265d6a60babfef"
+    },
+    {
+      "path": "tests/test_organize_v3.py",
+      "source_sha256": "6011b4724e6e56b3529944035a77297ebd0a02e75aa92b045e0fe6549de43cc5"
+    },
+    {
+      "path": "tests/test_organize_v4.py",
+      "source_sha256": "adcb1763893c2b876d442f66065ad98400bb53579a49dbaad4931d2bb9df793b"
+    },
+    {
+      "path": "tests/test_package_membership_diagnostics.py",
+      "source_sha256": "63dd5ffcfc6af21dfd9897ece064fec25a96eaeb82f5642fd1c74296f71bccbc"
+    },
+    {
+      "path": "tests/test_production_entry.py",
+      "source_sha256": "3addf5710bfa39534febedb216ffe60ef4e1c4215c6fffcf0476904cec449aef"
+    },
+    {
+      "path": "tests/test_semantic.py",
+      "source_sha256": "45b3d16836255840e2710bf2c1975503f4a168a0f7701a933e3f27f1392eb5d8"
+    },
+    {
+      "path": "tests/test_semantic_dependency_cert.py",
+      "source_sha256": "4a8c99b6f966361ff3dfe3e601380007fc32dd445df6fd14a29153bf8c3312d3"
+    },
+    {
+      "path": "tests/test_semantic_v2.py",
+      "source_sha256": "852b4a7737adf049760f014ead647057381c267ef4b9229d86eb9d6023e4fd78"
+    },
+    {
+      "path": "tests/test_semantic_v3.py",
+      "source_sha256": "d1e1636e789fe6f01fdbe41260dedd2e3c015cac4cbd70810fdb9ff7e850747b"
+    },
+    {
+      "path": "tests/test_semantic_v3_impact.py",
+      "source_sha256": "684dc2dd566156d61a6467a2bc12b1618ec02efbe64df9ce6f5e1bb57c6c9ddb"
+    },
+    {
+      "path": "tests/test_semantic_v3_safety.py",
+      "source_sha256": "3c93a788cf756fb16e40e9804a2e029528bf657c3e59deccc849f19e160df5f6"
+    },
+    {
+      "path": "tests/test_structural_blank_coverage.py",
+      "source_sha256": "02d5871cfc343b035a7ee1a5e892482f56d29abcbe82f12d9d500bfd3b3ed1f0"
+    },
+    {
+      "path": "tests/test_transcription_revision.py",
+      "source_sha256": "b16acd018492e4ab8fa5ba5d3b5d1ac004e0b1808e73f28c4f09b3d203dc7c53"
+    },
+    {
+      "path": "tests/test_v1_regression.py",
+      "source_sha256": "c5f94de791aa3174923fe48201febba4ba50b5576a34b61a16bbf99705e91357"
+    },
+    {
+      "path": "tests/test_workflow.py",
+      "source_sha256": "0249ae7bb0e13a1a2598f8322b340d7ab8c8ed262770fc409f9d2a4d953dc209"
+    }
+  ],
+  "adaptations": [
+    {
+      "path": "README.md",
+      "kind": "public-description",
+      "reason": "Self-contained public setup; private project references excluded"
+    },
+    {
+      "path": ".gitignore",
+      "kind": "generated",
+      "reason": "Keep private/runtime outputs out of version control"
+    },
+    {
+      "path": "tests/test_organize_v4.py",
+      "kind": "portable-test",
+      "reason": "Assert shell-quoted CLI paths, as emitted by actual RUNBOOK; Chinese/space paths require quoting. Original bare-path assertion failed only after relocation."
+    },
+    {
+      "path": "examples/reading_demo.py",
+      "kind": "synthetic-example",
+      "reason": "Extract _fixture/_published and imports from existing test_semantic.py to demonstrate required projection and view-spec; all review labels remain synthetic.",
+      "source_test_sha256": "45b3d16836255840e2710bf2c1975503f4a168a0f7701a933e3f27f1392eb5d8"
+    },
+    {
+      "path": "src/*.egg-info/",
+      "kind": "excluded-generated-metadata",
+      "reason": "Not part of public source; regenerate from pyproject during installation."
+    }
+  ],
+  "scope": "Reusable source, synthetic contracts and tests only; original history and private workspaces excluded"
+}

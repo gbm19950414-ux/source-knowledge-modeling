@@ -1,0 +1,8 @@
+{
+  "schema_version": "knowledge-foundation/v1",
+  "canonical_id": "https://source-knowledge-modeling.local/contracts/knowledge-foundation/v1/knowledge-foundation.schema.json",
+  "legacy_ids": [
+    "https://bodybuilding.local/contracts/knowledge-foundation/v1/knowledge-foundation.schema.json"
+  ],
+  "note": "The schema identifier moved with ownership; stored artifact fields, IDs and revisions remain unchanged."
+}

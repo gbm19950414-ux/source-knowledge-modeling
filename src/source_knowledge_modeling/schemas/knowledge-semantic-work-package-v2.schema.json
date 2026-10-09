@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://source-knowledge-modeling.local/contracts/knowledge-semantic-work-package/v2/schema.json",
+  "title": "Source-first semantic work package",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "artifact_id", "input_fingerprint", "inputs", "profile", "scope", "source_units", "steps"],
+  "properties": {
+    "schema_version": {"const": "knowledge-semantic-work-package/v2"},
+    "artifact_id": {"type": "string", "minLength": 1},
+    "input_fingerprint": {"$ref": "#/$defs/sha"},
+    "inputs": {"type": "object", "required": ["foundation_sha256", "scope_sha256", "profile_sha256", "guide_sha256", "source_sha256", "snapshot_sha256"], "additionalProperties": {"type": ["string", "null"]}},
+    "profile": {"type": "object", "required": ["id", "version", "definition_sha256"]},
+    "scope": {"type": "object", "required": ["included_locators", "description"]},
+    "source_units": {"type": "array", "minItems": 1, "items": {"type": "object", "required": ["locator", "order", "scope_role", "text"], "properties": {"locator": {"type": "string"}, "order": {"type": "integer", "minimum": 0}, "scope_role": {"enum": ["primary", "context"]}, "text": {"type": "string"}}}},
+    "steps": {"type": "object", "required": ["source_information", "discourse", "draft", "source_check", "independent_assessment", "review", "publish", "derive"], "additionalProperties": {"enum": ["pending", "complete"]}}
+  },
+  "$defs": {"sha": {"type": "string", "pattern": "^[a-f0-9]{64}$"}}
+}

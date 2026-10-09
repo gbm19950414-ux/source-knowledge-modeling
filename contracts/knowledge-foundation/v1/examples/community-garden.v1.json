@@ -1,0 +1,185 @@
+{
+  "schema_version": "knowledge-foundation/v1",
+  "artifact_id": "synthetic-community-garden",
+  "revision": {
+    "id": "r1",
+    "parent_id": null,
+    "note": "自编非训练文本，用于跨领域结构检验；不证明一般领域通用性。"
+  },
+  "source": {
+    "id": "synthetic-community-garden-text",
+    "kind": "synthetic_text",
+    "title": "社区花园浇水说明（自编合成）",
+    "path": "contracts/knowledge-foundation/v1/examples/community-garden.txt",
+    "sha256": "90b279d44bdb0460ae61bc0022a3e3bb7b539cbab0acdbf07f98cd524b8b6dd4",
+    "snapshot_path": "contracts/knowledge-foundation/v1/examples/community-garden.snapshot.json",
+    "snapshot_sha256": "751e725e1b0c174e5c742389bf06175ebcade599660264c344f2bb1ce8d7d42f",
+    "transcription_method": "逐行直接转写"
+  },
+  "scope": {
+    "description": "完整五行短文",
+    "included_locators": [
+      "line:1",
+      "line:5"
+    ],
+    "context_locators": [],
+    "outside_scope_note": "本文仅五行，全部纳入试点。"
+  },
+  "units": [
+    {
+      "id": "u1",
+      "order": 0,
+      "kind": "heading",
+      "locator": "line:1",
+      "content_sha256": "4ae9076a799f8d1027e2ce4ea8e7d547c36560bd85f8f27f56c4d9f581368a3d",
+      "transcription_status": "verified",
+      "interpretation_status": "not_applicable",
+      "review_note": "自编合成文本；按行原文核对。"
+    },
+    {
+      "id": "u2",
+      "order": 1,
+      "kind": "text",
+      "locator": "line:2",
+      "content_sha256": "5f6ec14da9b5ac5ae8820909a27dc28553ee143e7222c0d41a8cdabf780241a0",
+      "transcription_status": "verified",
+      "interpretation_status": "interpreted",
+      "review_note": "自编合成文本；按行原文核对。"
+    },
+    {
+      "id": "u3",
+      "order": 2,
+      "kind": "text",
+      "locator": "line:3",
+      "content_sha256": "b310c6a76355732cfa8cd4282fa6712403108221f2d73097c552bb1546610653",
+      "transcription_status": "verified",
+      "interpretation_status": "interpreted",
+      "review_note": "自编合成文本；按行原文核对。"
+    },
+    {
+      "id": "u4",
+      "order": 3,
+      "kind": "text",
+      "locator": "line:4",
+      "content_sha256": "32cabe7c0b7a573d7095e17ab6a232634a5e509081720ccaaa20ea1cc01a8a9f",
+      "transcription_status": "verified",
+      "interpretation_status": "interpreted",
+      "review_note": "自编合成文本；按行原文核对。"
+    },
+    {
+      "id": "u5",
+      "order": 4,
+      "kind": "text",
+      "locator": "line:5",
+      "content_sha256": "cc5f83ed3af313d59f77df1e6fd658909ae3bd331da06dfabb28ec8f784503ad",
+      "transcription_status": "verified",
+      "interpretation_status": "interpreted",
+      "review_note": "自编合成文本；按行原文核对。"
+    }
+  ],
+  "annotations": [
+    {
+      "id": "a-check",
+      "origin_type": "source_claim",
+      "role": "step",
+      "summary": "协调员每周六查看苗床表土。",
+      "unit_ids": [
+        "u2"
+      ],
+      "conditions": [
+        "每周六。"
+      ],
+      "exceptions": [],
+      "source_checked": true,
+      "scientific_status": "not_applicable"
+    },
+    {
+      "id": "a-water",
+      "origin_type": "source_claim",
+      "role": "conditional_action",
+      "summary": "志愿者按说明浇水。",
+      "unit_ids": [
+        "u3"
+      ],
+      "conditions": [
+        "表土干燥。",
+        "未来六小时没有降雨预报。"
+      ],
+      "exceptions": [],
+      "source_checked": true,
+      "scientific_status": "not_applicable"
+    },
+    {
+      "id": "a-postpone",
+      "origin_type": "source_claim",
+      "role": "exceptional_action",
+      "summary": "通常在预计下雨时推迟浇水。",
+      "unit_ids": [
+        "u4"
+      ],
+      "conditions": [
+        "预计下雨。"
+      ],
+      "exceptions": [
+        "若叶片萎蔫且表土仍干燥，交协调员现场决定。"
+      ],
+      "source_checked": true,
+      "scientific_status": "not_applicable"
+    },
+    {
+      "id": "a-human",
+      "origin_type": "source_claim",
+      "role": "human_judgment",
+      "summary": "协调员对萎蔫且干燥的例外情况现场决定。",
+      "unit_ids": [
+        "u4"
+      ],
+      "conditions": [
+        "叶片萎蔫且表土仍干燥。"
+      ],
+      "exceptions": [],
+      "source_checked": true,
+      "scientific_status": "not_applicable"
+    },
+    {
+      "id": "a-unknown",
+      "origin_type": "unresolved",
+      "role": "unresolved",
+      "summary": "文本未给出单次浇水量，也未提供浇水导致生长的因果证据。",
+      "unit_ids": [
+        "u5"
+      ],
+      "conditions": [],
+      "exceptions": [],
+      "source_checked": true,
+      "scientific_status": "not_applicable"
+    }
+  ],
+  "relations": [
+    {
+      "id": "r1",
+      "type": "precedes",
+      "from_id": "a-check",
+      "to_id": "a-water",
+      "support_unit_ids": [
+        "u2",
+        "u3"
+      ],
+      "origin_type": "project_interpretation",
+      "source_checked": true,
+      "note": "由原文先后顺序整理；没有补造浇水阈值。"
+    },
+    {
+      "id": "r2",
+      "type": "exception_to",
+      "from_id": "a-human",
+      "to_id": "a-postpone",
+      "support_unit_ids": [
+        "u4"
+      ],
+      "origin_type": "source_claim",
+      "source_checked": true,
+      "note": "同一句中的例外分支。"
+    }
+  ]
+}

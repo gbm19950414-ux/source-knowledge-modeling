@@ -1,0 +1,194 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "base_sha256",
+    "candidate_sha256",
+    "draft_sha256",
+    "inventory_sha256",
+    "discourse_sha256",
+    "assessment_sha256",
+    "certificate_sha256",
+    "plan_sha256",
+    "prior",
+    "targets",
+    "status"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "knowledge-semantic-assessment-reuse/v1"
+    },
+    "base_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "candidate_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "draft_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "inventory_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "discourse_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "assessment_sha256": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "certificate_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "plan_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "prior": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "manifest_sha256",
+        "quality_sha256",
+        "assessment_sha256",
+        "inventory_sha256",
+        "discourse_sha256",
+        "published_sha256",
+        "producer_sha256"
+      ],
+      "properties": {
+        "manifest_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "quality_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "assessment_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "inventory_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "discourse_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "published_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "producer_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "targets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "target_kind",
+          "target_id",
+          "mode",
+          "stamp",
+          "prior_stamp",
+          "prior_check_sha256",
+          "prior_revision_id",
+          "prior_review_id",
+          "prior_reviewer",
+          "check_sha256",
+          "reviewer",
+          "recheck_rationale"
+        ],
+        "properties": {
+          "target_kind": {
+            "enum": [
+              "information",
+              "discourse",
+              "element",
+              "relation"
+            ]
+          },
+          "target_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "mode": {
+            "enum": [
+              "fresh-required",
+              "reused"
+            ]
+          },
+          "stamp": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "prior_stamp": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "prior_check_sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "prior_revision_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "prior_review_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "prior_reviewer": {
+            "type": "object"
+          },
+          "check_sha256": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "reviewer": {
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "recheck_rationale": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "status": {
+      "enum": [
+        "pending",
+        "sealed"
+      ]
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

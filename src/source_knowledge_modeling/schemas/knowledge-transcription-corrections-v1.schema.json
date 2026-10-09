@@ -1,0 +1,176 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://source-knowledge-modeling.local/contracts/knowledge-transcription-corrections/v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "source_sha256",
+    "snapshot_sha256",
+    "reviewer",
+    "reviewer_type",
+    "model",
+    "checked_at",
+    "check_method",
+    "note",
+    "operations"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "knowledge-transcription-corrections/v1"
+    },
+    "source_sha256": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "snapshot_sha256": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "reviewer": {
+      "type": "string",
+      "minLength": 1
+    },
+    "reviewer_type": {
+      "enum": [
+        "AI",
+        "human"
+      ]
+    },
+    "model": {
+      "type": "string",
+      "minLength": 1
+    },
+    "checked_at": {
+      "type": "string",
+      "minLength": 1
+    },
+    "check_method": {
+      "enum": [
+        "original_visual",
+        "source_text"
+      ]
+    },
+    "note": {
+      "type": "string",
+      "minLength": 1
+    },
+    "operations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "op",
+          "unit"
+        ],
+        "properties": {
+          "op": {
+            "enum": [
+              "replace",
+              "insert"
+            ]
+          },
+          "unit": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "locator",
+              "kind",
+              "text",
+              "bbox",
+              "visual_ref",
+              "raw_content",
+              "continues_prev",
+              "continues_from",
+              "continuation_method"
+            ],
+            "properties": {
+              "locator": {
+                "type": "string",
+                "minLength": 1
+              },
+              "kind": {
+                "type": "string",
+                "minLength": 1
+              },
+              "text": {
+                "type": "string"
+              },
+              "bbox": {
+                "oneOf": [
+                  {
+                    "type": "null"
+                  },
+                  {
+                    "type": "array",
+                    "minItems": 4,
+                    "maxItems": 4,
+                    "items": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 1
+                    }
+                  }
+                ]
+              },
+              "visual_ref": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "raw_content": {},
+              "continues_prev": {
+                "type": "boolean"
+              },
+              "continues_from": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "continuation_method": {
+                "enum": [
+                  "parser",
+                  "manual",
+                  null
+                ]
+              }
+            }
+          },
+          "after_locator": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "op": {
+                  "const": "insert"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "after_locator"
+              ]
+            },
+            "else": {
+              "not": {
+                "required": [
+                  "after_locator"
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

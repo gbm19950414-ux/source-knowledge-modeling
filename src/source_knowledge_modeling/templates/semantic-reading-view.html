@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>语义学习视图</title></head><body>
+<div id="semantic-load-map">
+  <style>
+    :root { color-scheme:light dark; --background:#ffffff; --foreground:#18212b; --muted-foreground:#5b6572; --border:#d7dee7; --primary:#2879d8; --primary-foreground:#ffffff; --viz-series-1:#2879d8; --viz-series-2:#bf6d1e; --viz-series-3:#399669; --viz-series-4:#a55591; --viz-series-5:#7660bd; --viz-series-6:#247f85; font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; }
+    @media(prefers-color-scheme:dark){:root{--background:#161b22;--foreground:#edf3f9;--muted-foreground:#aab4c0;--border:#414b58;--primary:#64a8f9;--primary-foreground:#101c2c;--viz-series-1:#64a8f9;--viz-series-2:#e9a964;--viz-series-3:#6fc799;--viz-series-4:#d18bbe;--viz-series-5:#b4a1ee;--viz-series-6:#77c8cf;}}
+    *{box-sizing:border-box} body{margin:0;background:var(--background);color:var(--foreground)}
+    #semantic-load-map { max-width:960px; margin:0 auto; padding:24px 20px 48px; color:var(--foreground); overflow-wrap:anywhere; }
+    #semantic-load-map h1{font-size:1.5rem;font-weight:600;margin:0 0 8px} #semantic-load-map h3{font-size:1.05rem;font-weight:600}
+    #semantic-load-map .text-small{font-size:.86rem} #semantic-load-map .btn{display:inline-block;border:1px solid var(--border);border-radius:8px;padding:7px 10px;background:transparent;color:var(--foreground);font:inherit;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer}
+    #semantic-load-map .btn:hover{background:color-mix(in srgb,var(--primary) 10%,transparent)} #semantic-load-map .btn[aria-pressed=true]{background:var(--primary);color:var(--primary-foreground);border-color:var(--primary)} #semantic-load-map .btn:focus-visible,#semantic-load-map select:focus-visible,#semantic-load-map summary:focus-visible{outline:2px solid var(--primary);outline-offset:2px}
+    #semantic-load-map .btn-block{display:block;width:100%} #semantic-load-map .form-label{display:block;color:var(--muted-foreground)} #semantic-load-map .form-select{display:block;width:100%;min-width:0;max-width:100%;padding:7px;color:var(--foreground);background:var(--background);border:1px solid var(--border);border-radius:7px;font:inherit} #semantic-load-map summary{cursor:pointer}
+
+    #semantic-load-map .sm-top { display:flex; flex-wrap:wrap; align-items:center; gap:8px 20px; margin-bottom:16px; }
+    #semantic-load-map .sm-meta { color:var(--muted-foreground); }
+    #semantic-load-map .sm-overview { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:28px; }
+    #semantic-load-map .sm-group { position:relative; padding-left:14px; }
+    #semantic-load-map .sm-group::before { content:""; position:absolute; top:40px; bottom:25px; left:0; width:1px; background:var(--border); }
+    #semantic-load-map .sm-leaf { position:relative; margin:20px 0; }
+    #semantic-load-map .sm-leaf::before { content:""; position:absolute; left:-14px; top:22px; width:14px; height:1px; background:var(--border); }
+    #semantic-load-map .sm-count { margin-top:5px; color:var(--muted-foreground); }
+    #semantic-load-map .sm-root-label { text-align:center; margin:18px 0 24px; }
+    #semantic-load-map .sm-root-line { height:18px; width:1px; margin:8px auto 0; background:var(--border); }
+    #semantic-load-map .sm-navigation { display:flex; flex-wrap:wrap; align-items:end; gap:12px; margin:12px 0; }
+    #semantic-load-map .sm-field { flex:1; min-width:0; }
+    #semantic-load-map .sm-view-modes { display:flex; flex-wrap:wrap; gap:8px; }
+    #semantic-load-map .sm-graph { position:relative; width:100%; margin:16px 0; }
+    #semantic-load-map .sm-edges { position:absolute; inset:0; width:100%; height:100%; overflow:visible; }
+    #semantic-load-map .sm-edges path { fill:none; stroke:var(--border); stroke-width:1.5; }
+    #semantic-load-map .sm-edges path.sm-project-edge { stroke-dasharray:6 4; }
+    #semantic-load-map .sm-edges text { fill:var(--muted-foreground); font-size:12px; }
+    #semantic-load-map .sm-node { position:absolute; }
+    #semantic-load-map .sm-total-node { padding:9px; border:1px solid var(--border); border-radius:9px; background:var(--background); }
+    #semantic-load-map .sm-total-node .btn { white-space:normal; text-align:left; }
+    #semantic-load-map .sm-external { color:var(--muted-foreground); margin:0 0 5px; }
+    #semantic-load-map .sm-total-edges path { stroke:var(--muted-foreground); stroke-width:1.7; opacity:.7; }
+    #semantic-load-map .sm-total-edges path.sm-edge-active { stroke:var(--primary); stroke-width:2.8; opacity:1; }
+    #semantic-load-map .sm-total-edges path.sm-edge-dim { opacity:.28; }
+    #semantic-load-map .sm-total-edges text { fill:var(--muted-foreground); font-size:11px; paint-order:stroke; stroke:var(--background); stroke-width:4px; stroke-linejoin:round; }
+    #semantic-load-map .sm-total-edges text.sm-edge-active { fill:var(--primary); }
+    #semantic-load-map .sm-mobile-node { position:relative; margin:12px 0; }
+    #semantic-load-map .sm-mobile-links { margin:8px 0 0; padding-left:20px; }
+    #semantic-load-map .sm-mobile-links li { margin:5px 0; }
+    #semantic-load-map .sm-kind { display:flex; align-items:center; gap:6px; margin-bottom:5px; }
+    #semantic-load-map .sm-dot { display:inline-block; width:8px; height:8px; border-radius:50%; background:var(--node-color); }
+    #semantic-load-map .sm-node-name { overflow-wrap:anywhere; }
+    #semantic-load-map .sm-selected { margin:18px 0; }
+    #semantic-load-map .sm-selected p { margin:8px 0; }
+    #semantic-load-map .sm-quote { border-left:2px solid var(--border); padding-left:12px; margin:8px 0; overflow-wrap:anywhere; }
+    #semantic-load-map .sm-evidence details { margin:8px 0; }
+    #semantic-load-map .sm-evidence summary { color:var(--muted-foreground); }
+    #semantic-load-map .sm-legend { display:flex; flex-wrap:wrap; gap:8px 16px; margin:16px 0; }
+    #semantic-load-map .sm-legend span { display:flex; align-items:center; gap:5px; }
+    #semantic-load-map .sm-mobile-row { display:grid; grid-template-columns:minmax(0,1fr); gap:8px; margin:18px 0; }
+    #semantic-load-map .sm-mobile-label { text-align:center; color:var(--muted-foreground); }
+    #semantic-load-map .sm-footer { margin-top:18px; color:var(--muted-foreground); }
+    #semantic-load-map [hidden] { display:none !important; }
+    @media(max-width:600px) { #semantic-load-map .sm-overview { grid-template-columns:1fr; gap:10px; } #semantic-load-map .sm-navigation .sm-field,#semantic-load-map #sm-graph-count { flex:0 0 100%; } }
+  </style>
+  <div id="sm-template-notice" role="status">
+    <h1>语义学习视图模板</h1>
+    <p>此文件是生成器使用的模板，不包含学习数据。请打开 <code>skm render --format html</code> 生成的 HTML 文件。</p>
+  </div>
+  <h1 id="sm-title"></h1>
+  <div class="sm-top text-small">
+    <span id="sm-size"></span><span class="sm-meta" id="sm-scope"></span>
+    <span class="sm-meta" id="sm-checks"></span>
+  </div>
+  <div id="sm-overview-panel">
+    <div class="sm-root-label"><span id="sm-root-title"></span><div class="sm-root-line"></div><span class="text-small sm-meta">阅读分组 · 展开主题可查看模型中的有向关系</span></div>
+    <div class="sm-overview" id="sm-overview"></div>
+  </div>
+  <div id="sm-detail-panel" hidden>
+    <div class="sm-navigation">
+      <button class="btn" type="button" id="sm-back">小节总览</button>
+      <div class="sm-field"><label class="form-label">主题<select class="form-select" id="sm-topic"></select></label></div>
+    </div>
+    <div id="sm-summary"></div>
+    <div class="sm-view-modes" role="group" aria-label="关系图视图">
+      <button class="btn" type="button" id="sm-focus-mode" aria-pressed="true">焦点视图</button>
+      <button class="btn" type="button" id="sm-total-mode" aria-pressed="false">主题总视图</button>
+    </div>
+    <div class="sm-view-modes" id="sm-layer-controls" role="group" aria-label="关系来源层" hidden>
+      <button class="btn" type="button" id="sm-source-layer" aria-pressed="true">作者来源层</button>
+      <button class="btn" type="button" id="sm-all-layer" aria-pressed="false">含项目解释</button>
+    </div>
+    <div class="sm-navigation">
+      <div class="sm-field"><label class="form-label">焦点要素<select class="form-select" id="sm-element"></select></label></div>
+      <span class="text-small sm-meta" id="sm-graph-count"></span>
+    </div>
+    <div class="sm-graph" id="sm-graph" role="group" aria-label="所选要素与其直接相关的有向关系"></div>
+    <details id="sm-source-order" hidden><summary>按原文顺序查看要素出现位置</summary><ol id="sm-source-order-list"></ol></details>
+    <div class="sm-selected" aria-live="polite" id="sm-selected"></div>
+    <details id="sm-all-relations"><summary id="sm-relations-summary"></summary><div id="sm-relations"></div></details>
+  </div>
+  <details id="sm-gaps-panel" hidden><summary id="sm-gaps-summary"></summary><div id="sm-gaps"></div></details>
+  <div class="sm-legend text-small" id="sm-legend"></div>
+  <div class="sm-footer text-small" id="sm-footer"></div>
+  <script type="application/json" id="sm-data">__PAYLOAD__</script>
+  <script>
+  (() => {
+    const root=document.getElementById('semantic-load-map');
+    const payload=root.querySelector('#sm-data').textContent.trim();
+    if(!payload.startsWith('{'))return;
+    const data=JSON.parse(payload);
+    root.querySelector('#sm-template-notice').hidden=true;
+    const el=id=>root.querySelector('#'+id);
+    const kinds={assertion:'作者表述',action:'动作／步骤',condition:'条件',exception:'例外／限制',reason:'理由',parameter:'参数',example:'作者举例',unresolved:'未解决'};
+    const rels={conditions:'约束',exception_to:'例外于',replaces:'替代',supports:'支持',precedes:'先于',quantifies:'参数属于',example_of:'举例说明',qualifies:'限定／补充',causes:'导致',contrasts_with:'对比',elaborates:'阐释'};
+    const colors={action:'var(--viz-series-1)',condition:'var(--viz-series-2)',exception:'var(--viz-series-2)',reason:'var(--viz-series-3)',parameter:'var(--viz-series-4)',example:'var(--viz-series-5)',assertion:'var(--muted-foreground)',unresolved:'var(--viz-series-6)'};
+    const origins={source_claim:'作者主张',source_example:'作者举例',project_interpretation:'项目解释',unresolved:'未解决'};
+    const modalities={asserted:'明确表述',recommended:'建议',possible:'可能',hypothetical:'假设／举例',negated:'否定',unresolved:'未确定'};
+    const isV3=data.artifact_schema_version==='knowledge-semantic-projection/v3';
+    let state={topic:null,focus:null,mode:'focus',highlight:null,layer:'source'};
+    function shownTopic(topic){if(!isV3)return topic;const edges=topic.relations.filter(r=>state.layer==='all'||r.origin_type!=='project_interpretation');const linked=new Set(edges.flatMap(r=>[r.from_id,r.to_id]));const elements=topic.elements.filter(e=>state.layer==='all'||e.origin_type!=='project_interpretation'||linked.has(e.id));return {...topic,elements,relations:edges};}
+    const make=(tag,cls,text)=>{const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n;};
+    const button=(text,fn,pressed=false)=>{const b=make('button','btn btn-block',text);b.type='button';b.dataset.fullText=text;b.setAttribute('aria-label',text);b.setAttribute('aria-pressed',String(pressed));b.addEventListener('click',fn);return b;};
+    const short=text=>text.length>27?text.slice(0,26)+'…':text;
+    function fitButtons(){for(const b of root.querySelectorAll('button[data-full-text]')){if(!b.clientWidth)continue;const full=b.dataset.fullText;b.textContent=full;let n=full.length;while(b.scrollWidth>b.clientWidth&&n>3)b.textContent=full.slice(0,--n)+'…';}}
+    function save(){if(window.openai&&window.openai.setWidgetState)window.openai.setWidgetState({modelContent:{section:data.title,statement_id:state.topic,element_id:state.focus,revision:data.revision},privateContent:state}).catch(()=>{});}
+    function evidence(anchors,regions){const box=make('div','sm-evidence');const unique=new Map(anchors.map(a=>[a.locator+':'+a.start+':'+a.end,a]));for(const a of unique.values()){const d=document.createElement('details');d.append(make('summary','text-small',a.locator+' ['+a.start+':'+a.end+']'));d.append(make('div','sm-quote','“'+a.quote+'”'));box.append(d);}for(const r of regions||[]){const d=document.createElement('details');d.append(make('summary','text-small',r.locator+' · '+r.native_kind+' · '+r.interpretation_status));d.append(make('div','sm-quote','原页区域 '+r.bbox.join(', ')+'；原生结构 '+r.native_structure_sha256+'；'+r.note));box.append(d);}return box;}
+    function selectTopic(id,focus){const s=data.statements.find(s=>s.id===id);if(!s)return;const first=isV3?(s.source_order_ids||[]).find(id=>(s.primary_element_ids||[]).includes(id)&&s.elements.some(e=>e.id===id&&e.origin_type!=='project_interpretation')):(s.elements.find(e=>e.kind==='action')||s.elements[0]).id;state={topic:id,focus:focus&&s.elements.some(e=>e.id===focus)?focus:(first||s.elements[0].id),mode:'focus',highlight:null,layer:'source'};render();save();}
+    function selectFocus(id){const graphHadFocus=el('sm-graph').contains(document.activeElement);state.focus=id;if(state.mode==='total')state.highlight=id;renderDetail();if(graphHadFocus){const item=[...el('sm-graph').querySelectorAll('button[data-element-id]')].find(b=>b.dataset.elementId===id);if(item)item.focus();}save();}
+    function switchMode(mode){if(state.mode===mode)return;state.mode=mode;state.highlight=null;renderDetail();save();}
+    function switchLayer(layer){if(!isV3||state.layer===layer)return;state.layer=layer;state.highlight=null;renderDetail();save();}
+    function nodeBox(e,center=false,external=false,total=false){const wrap=make('div','sm-node'+(total?' sm-total-node':''));wrap.dataset.elementId=e.id;const kind=make('div','sm-kind text-small');const dot=make('i','sm-dot');dot.style.setProperty('--node-color',colors[e.kind]);kind.append(dot,make('span',null,kinds[e.kind]));wrap.append(kind);if(external)wrap.append(make('div','sm-external text-small','关联主题'));const b=button(e.text,()=>selectFocus(e.id),center);b.dataset.elementId=e.id;wrap.append(b);return wrap;}
+    function renderOverview(){const target=el('sm-overview');target.replaceChildren();for(const group of data.groups){const col=make('div','sm-group');col.append(make('h3',null,group.label));for(const id of group.ids){const s=data.statements.find(x=>x.id===id);const leaf=make('div','sm-leaf');leaf.append(button(s.label,()=>selectTopic(s.id)));leaf.append(make('div','sm-count text-small',s.elements.length+' 要素 · '+s.relations.length+' 关系'));col.append(leaf);}target.append(col);}}
+    function renderGraph(s,focus){const holder=el('sm-graph');holder.replaceChildren();holder.classList.remove('sm-all-mobile');holder.setAttribute('aria-label','所选要素与其直接相关的有向关系');const byId=new Map(s.elements.map(e=>[e.id,e]));const incoming=s.relations.filter(r=>r.to_id===focus.id),outgoing=s.relations.filter(r=>r.from_id===focus.id);const neighbors=new Set([...incoming.map(r=>r.from_id),...outgoing.map(r=>r.to_id)]);el('sm-graph-count').textContent='当前邻域 '+(neighbors.size+1)+' / '+s.elements.length+' 要素';const width=holder.clientWidth;
+      if(width<580){holder.style.height='auto';if(!incoming.length&&!outgoing.length){const n=nodeBox(focus,true);n.style.position='relative';holder.append(n);}for(const r of [...incoming,...outgoing]){const row=make('div','sm-mobile-row');const from=nodeBox(byId.get(r.from_id),r.from_id===focus.id),to=nodeBox(byId.get(r.to_id),r.to_id===focus.id);from.style.position='relative';to.style.position='relative';row.append(from,make('div','sm-mobile-label text-small','↓ '+rels[r.type]),to);holder.append(row);}return;}
+      const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.classList.add('sm-edges');svg.setAttribute('aria-hidden','true');holder.append(svg);const markerId='sm-arrow';svg.innerHTML='<defs><marker id="'+markerId+'" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" style="fill:var(--muted-foreground);stroke:none" /></marker></defs>';
+      const nodeW=Math.min(200,(width-168)/3),gap=(width-nodeW*3)/2;const x=[0,nodeW+gap,(nodeW+gap)*2];const left=[...new Set(incoming.map(r=>r.from_id))],right=[...new Set(outgoing.map(r=>r.to_id))];const placements=new Map();let leftY=8,rightY=8;
+      for(const [ids,col] of [[left,0],[right,2]]){for(const id of ids){const n=nodeBox(byId.get(id));n.style.width=nodeW+'px';n.style.left=x[col]+'px';holder.append(n);const h=n.getBoundingClientRect().height;const y=col===0?leftY:rightY;n.style.top=y+'px';placements.set(col+':'+id,{x:x[col],y,h,w:nodeW});if(col===0)leftY+=h+30;else rightY+=h+30;}}
+      const center=nodeBox(focus,true);center.style.width=nodeW+'px';center.style.left=x[1]+'px';holder.append(center);const ch=center.getBoundingClientRect().height;const h=Math.max(leftY,rightY,ch+40);const cy=Math.max(8,(h-ch)/2);center.style.top=cy+'px';placements.set('center',{x:x[1],y:cy,h:ch,w:nodeW});holder.style.height=h+'px';svg.setAttribute('viewBox','0 0 '+width+' '+h);
+      function path(r,index,count,isIncoming){const side=placements.get((isIncoming?'0:':'2:')+(isIncoming?r.from_id:r.to_id)),c=placements.get('center');const sy=isIncoming?side.y+side.h/2:c.y+c.h*(index+1)/(count+1);const ty=isIncoming?c.y+c.h*(index+1)/(count+1):side.y+side.h/2;const sx=isIncoming?side.x+side.w:c.x+c.w;const tx=isIncoming?c.x:side.x;const curve=document.createElementNS(svg.namespaceURI,'path');curve.setAttribute('d',`M${sx},${sy} C${sx+gap*.48},${sy} ${tx-gap*.48},${ty} ${tx-4},${ty}`);if(r.type!=='contrasts_with')curve.setAttribute('marker-end','url(#'+markerId+')');if(r.origin_type==='project_interpretation')curve.classList.add('sm-project-edge');svg.append(curve);const t=document.createElementNS(svg.namespaceURI,'text');t.textContent=rels[r.type];t.setAttribute('x',isIncoming?sx+8:tx-8);t.setAttribute('y',(isIncoming?sy:ty)-9);t.setAttribute('text-anchor',isIncoming?'start':'end');svg.append(t);}
+      incoming.forEach((r,i)=>path(r,i,incoming.length,true));outgoing.forEach((r,i)=>path(r,i,outgoing.length,false));
+    }
+    function totalRows(s,columns){
+      const order=new Map(s.elements.map((e,i)=>[e.id,i]));
+      const adjacent=new Map(s.elements.map(e=>[e.id,new Set()]));
+      const incoming=new Map(s.elements.map(e=>[e.id,0]));
+      for(const r of s.relations){adjacent.get(r.from_id).add(r.to_id);adjacent.get(r.to_id).add(r.from_id);incoming.set(r.to_id,incoming.get(r.to_id)+1);}
+      const visited=new Set(),components=[];
+      for(const element of s.elements){
+        if(visited.has(element.id))continue;
+        const queue=[element.id],component=[];visited.add(element.id);
+        for(let i=0;i<queue.length;i++){const id=queue[i];component.push(id);for(const next of [...adjacent.get(id)].sort((a,b)=>order.get(a)-order.get(b))){if(!visited.has(next)){visited.add(next);queue.push(next);}}}
+        components.push(component);
+      }
+      components.sort((a,b)=>Number(adjacent.get(a[0]).size===0)-Number(adjacent.get(b[0]).size===0)||order.get(a[0])-order.get(b[0]));
+      return components.map(component=>{
+        const seed=[...component].sort((a,b)=>incoming.get(a)-incoming.get(b)||order.get(a)-order.get(b))[0];
+        const depth=new Map([[seed,0]]),queue=[seed];
+        for(let i=0;i<queue.length;i++){const id=queue[i];for(const next of [...adjacent.get(id)].sort((a,b)=>order.get(a)-order.get(b))){if(!depth.has(next)){depth.set(next,depth.get(id)+1);queue.push(next);}}}
+        const levels=new Map();for(const id of component){const rank=depth.get(id);if(!levels.has(rank))levels.set(rank,[]);levels.get(rank).push(id);}
+        const rows=[];for(const rank of [...levels.keys()].sort((a,b)=>a-b)){const ids=levels.get(rank).sort((a,b)=>order.get(a)-order.get(b));for(let i=0;i<ids.length;i+=columns)rows.push(ids.slice(i,i+columns));}
+        return rows;
+      });
+    }
+    function renderAllGraph(s){
+      const holder=el('sm-graph');holder.replaceChildren();holder.style.height='auto';holder.setAttribute('aria-label','本主题全部要素和有向关系');
+      const byId=new Map(s.elements.map(e=>[e.id,e])),primary=new Set(s.primary_element_ids||s.elements.map(e=>e.id));
+      const connected=new Set(s.relations.flatMap(r=>[r.from_id,r.to_id]));
+      el('sm-graph-count').textContent='全部 '+s.elements.length+' 要素 · '+s.relations.length+' 关系 · '+(s.elements.length-connected.size)+' 无连接';
+      const width=holder.clientWidth;
+      if(width<580){
+        holder.classList.add('sm-all-mobile');
+        for(const component of totalRows(s,1))for(const row of component)for(const id of row){
+          const node=nodeBox(byId.get(id),state.highlight===id,!primary.has(id),true);node.classList.add('sm-mobile-node');node.style.position='relative';
+          const outgoing=s.relations.filter(r=>r.from_id===id);
+          if(outgoing.length){const list=make('ul','sm-mobile-links text-small');for(const r of outgoing)list.append(make('li',null,(rels[r.type]||r.type)+' → '+byId.get(r.to_id).text));node.append(list);}
+          else if(!connected.has(id))node.append(make('div','text-small sm-meta','当前无显式关系'));
+          holder.append(node);
+        }
+        fitButtons();return;
+      }
+      holder.classList.remove('sm-all-mobile');
+      const columns=width>=800?3:2,gapX=24,gapY=32,nodeWidth=(width-gapX*(columns-1))/columns;
+      const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.classList.add('sm-edges','sm-total-edges');svg.setAttribute('aria-hidden','true');
+      svg.innerHTML='<defs><marker id="sm-all-arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" style="fill:var(--muted-foreground);stroke:none" /></marker></defs>';holder.append(svg);
+      const positions=new Map(),laneY=Array(columns).fill(8);
+      for(const component of totalRows(s,columns)){
+        const span=Math.max(...component.map(row=>row.length));let start=0,best=Infinity;
+        for(let column=0;column<=columns-span;column++){const top=Math.max(...laneY.slice(column,column+span));if(top<best){best=top;start=column;}}
+        let y=best;
+        for(const row of component){let rowHeight=0;
+          row.forEach((id,index)=>{const column=start+index,node=nodeBox(byId.get(id),state.highlight===id,!primary.has(id),true);node.style.width=nodeWidth+'px';node.style.left=column*(nodeWidth+gapX)+'px';node.style.top=y+'px';holder.append(node);const height=node.getBoundingClientRect().height;positions.set(id,{x:column*(nodeWidth+gapX),y,w:nodeWidth,h:height});rowHeight=Math.max(rowHeight,height);});
+          y+=rowHeight+gapY;
+        }
+        for(let column=start;column<start+span;column++)laneY[column]=y+20;
+      }
+      const height=Math.max(80,...laneY);holder.style.height=height+'px';svg.setAttribute('viewBox','0 0 '+width+' '+height);
+      for(const r of s.relations){
+        const from=positions.get(r.from_id),to=positions.get(r.to_id),dx=(to.x+to.w/2)-(from.x+from.w/2),dy=(to.y+to.h/2)-(from.y+from.h/2),horizontal=Math.abs(dx)>Math.abs(dy);
+        const sx=horizontal?(dx>=0?from.x+from.w:from.x):from.x+from.w/2,sy=horizontal?from.y+from.h/2:(dy>=0?from.y+from.h:from.y);
+        const tx=horizontal?(dx>=0?to.x:to.x+to.w):to.x+to.w/2,ty=horizontal?to.y+to.h/2:(dy>=0?to.y:to.y+to.h);
+        const path=document.createElementNS(svg.namespaceURI,'path'),midX=(sx+tx)/2,midY=(sy+ty)/2;
+        path.setAttribute('d',horizontal?`M${sx},${sy} C${midX},${sy} ${midX},${ty} ${tx},${ty}`:`M${sx},${sy} C${sx},${midY} ${tx},${midY} ${tx},${ty}`);
+        if(r.type!=='contrasts_with')path.setAttribute('marker-end','url(#sm-all-arrow)');if(r.origin_type==='project_interpretation')path.classList.add('sm-project-edge');path.append(document.createElementNS(svg.namespaceURI,'title'));path.firstChild.textContent=(rels[r.type]||r.type)+'：'+byId.get(r.from_id).text+(r.type==='contrasts_with'?' ↔ ':' → ')+byId.get(r.to_id).text;
+        const active=state.highlight&&(r.from_id===state.highlight||r.to_id===state.highlight);if(state.highlight)path.classList.add(active?'sm-edge-active':'sm-edge-dim');svg.append(path);
+        const label=document.createElementNS(svg.namespaceURI,'text');label.textContent=rels[r.type]||r.type;label.setAttribute('x',String(midX));label.setAttribute('y',String(midY-5));label.setAttribute('text-anchor','middle');if(active)label.classList.add('sm-edge-active');if(state.highlight&&!active)label.style.opacity='.28';svg.append(label);
+      }
+      fitButtons();
+    }
+    function relationRow(s,r){const byId=new Map(s.elements.map(e=>[e.id,e]));const d=document.createElement('details'),direction=r.type==='contrasts_with'?'↔':'→',label=rels[r.type]||r.type;const sum=make('summary',null,short(byId.get(r.from_id).text)+' —'+label+direction+' '+short(byId.get(r.to_id).text));d.append(sum);d.append(make('p',null,byId.get(r.from_id).text+' — '+label+' '+direction+' '+byId.get(r.to_id).text));if(r.note)d.append(make('p','text-small',r.note));if(r.origin_type)d.append(make('p','text-small sm-meta',(origins[r.origin_type]||r.origin_type)+' · '+(r.basis||'')+(r.rationale?' · '+r.rationale:'')+(r.uncertainty?' · 不确定性：'+r.uncertainty:'')));d.append(make('div','text-small sm-meta',r.id+' · '+r.type+(r.review_label?' · '+r.review_label:'')),evidence(r.anchors,r.regions));return d;}
+    function renderSourceOrder(s){const panel=el('sm-source-order'),list=el('sm-source-order-list');panel.hidden=false;list.replaceChildren();const byId=new Map(s.elements.map(e=>[e.id,e]));const unitOrder=new Map((data.source_units||[]).map(u=>[u.locator,u.order]));const occurrences=[...(s.occurrences||[])].filter(x=>byId.has(x.element_id)).sort((a,b)=>(unitOrder.get(a.locator)||0)-(unitOrder.get(b.locator)||0)||a.start-b.start||a.id.localeCompare(b.id));for(const o of occurrences){const li=make('li');const e=byId.get(o.element_id);const b=button(e.text+' · '+o.locator+' ['+o.start+':'+o.end+']',()=>selectFocus(e.id),state.focus===e.id);li.append(b);list.append(li);}}
+    function renderDetail(){const topic=data.statements.find(x=>x.id===state.topic);if(!topic)return;const s=shownTopic(topic);if(!s.elements.length){el('sm-graph').replaceChildren(make('p','text-small sm-meta','此层没有要素。'));return;}const focus=s.elements.find(e=>e.id===state.focus)||s.elements[0];state.focus=focus.id;el('sm-topic').value=s.id;const menu=el('sm-element');menu.replaceChildren();for(const e of s.elements){const option=make('option',null,kinds[e.kind]+' · '+e.text);option.value=e.id;menu.append(option);}menu.value=focus.id;el('sm-summary').textContent=s.summary;el('sm-source-layer').setAttribute('aria-pressed',String(state.layer==='source'));el('sm-all-layer').setAttribute('aria-pressed',String(state.layer==='all'));el('sm-focus-mode').setAttribute('aria-pressed',String(state.mode==='focus'));el('sm-total-mode').setAttribute('aria-pressed',String(state.mode==='total'));if(state.mode==='total')renderAllGraph(s);else renderGraph(s,focus);const selected=el('sm-selected');selected.replaceChildren();selected.append(make('h3',null,kinds[focus.kind]+' · '+focus.text));selected.append(make('p','text-small sm-meta',origins[focus.origin_type||s.origin_type]+' · '+modalities[focus.modality||s.modality]+' · '+focus.id));selected.append(make('p','text-small sm-meta','来源审阅：'+(focus.review_label||s.review.reviewer+' / '+s.review.check_method)+' · 科学：'+s.scientific_status+' · 个人适用性：'+s.applicability_status));if(focus.quantity){const q=focus.quantity;selected.append(make('p',null,q.amount+' '+q.unit+'；适用对象：'+q.basis+(q.scope?'；范围：'+q.scope:'')));}selected.append(evidence(focus.anchors,focus.regions));if(isV3)renderSourceOrder(s);const edges=s.relations.filter(r=>r.from_id===focus.id||r.to_id===focus.id);if(!edges.length)selected.append(make('p','text-small sm-meta','该要素当前没有显式关系；来源文字仍保留。'));const list=el('sm-relations');list.replaceChildren();for(const r of s.relations)list.append(relationRow(s,r));el('sm-relations-summary').textContent='查看本主题全部 '+s.relations.length+' 条关系及其依据';fitButtons();}
+    function render(){const active=Boolean(state.topic);el('sm-overview-panel').hidden=active;el('sm-detail-panel').hidden=!active;if(active)renderDetail();fitButtons();}
+    el('sm-title').textContent=data.title+' · 语义关系图';el('sm-root-title').textContent=data.title;el('sm-scope').textContent=data.scope_label;el('sm-checks').textContent=data.checks_label;el('sm-footer').textContent='来源版本 '+data.revision+' · 规范 '+data.profile.id+'@'+data.profile.version+' · 视图 '+data.schema_version+' · 有锚点不代表已穷尽理解。';
+    if(data.gaps&&data.gaps.length){el('sm-gaps-panel').hidden=false;el('sm-gaps-summary').textContent='查看 '+data.gaps.length+' 项未完成来源信息';for(const gap of data.gaps)el('sm-gaps').append(make('p','text-small',gap.locator+(gap.region?' · 原页区域 '+gap.region.bbox.join(', '):' ['+gap.start+':'+gap.end+']')+' · '+gap.status+' · '+gap.meaning+' · '+gap.reason));}
+    el('sm-size').textContent=data.statements.length+' 组内容 · '+data.statements.reduce((n,s)=>n+s.elements.length,0)+' 要素 · '+data.statements.reduce((n,s)=>n+s.relations.length,0)+' 关系';
+    for(const s of data.statements){const o=make('option',null,s.label);o.value=s.id;el('sm-topic').append(o);}
+    for(const kind of ['action','condition','reason','parameter','example','unresolved']){const label=make('span');const dot=make('i','sm-dot');dot.style.setProperty('--node-color',colors[kind]);label.append(dot,document.createTextNode(kinds[kind]));el('sm-legend').append(label);}
+    el('sm-layer-controls').hidden=!isV3;el('sm-source-layer').addEventListener('click',()=>switchLayer('source'));el('sm-all-layer').addEventListener('click',()=>switchLayer('all'));el('sm-back').addEventListener('click',()=>{state={topic:null,focus:null,mode:'focus',highlight:null,layer:'source'};render();save();});el('sm-topic').addEventListener('change',e=>selectTopic(e.target.value));el('sm-element').addEventListener('change',e=>selectFocus(e.target.value));el('sm-focus-mode').addEventListener('click',()=>switchMode('focus'));el('sm-total-mode').addEventListener('click',()=>switchMode('total'));
+    renderOverview();
+    function restore(saved){const value=saved&&saved.privateContent,topic=value&&data.statements.find(s=>s.id===value.topic);if(topic){state={topic:topic.id,focus:value.focus,mode:value.mode==='total'?'total':'focus',highlight:topic.elements.some(e=>e.id===value.highlight)?value.highlight:null,layer:isV3&&value.layer==='all'?'all':'source'};}else state={topic:null,focus:null,mode:'focus',highlight:null,layer:'source'};render();}
+    restore(window.openai&&window.openai.widgetState);window.addEventListener('openai:set_globals',e=>{if(e.detail&&e.detail.globals&&'widgetState' in e.detail.globals)restore(e.detail.globals.widgetState);});
+    let lastWidth=0;new ResizeObserver(()=>{const w=root.clientWidth;if(Math.abs(w-lastWidth)>1){lastWidth=w;if(state.topic)renderDetail();else fitButtons();}}).observe(root);
+    root.dataset.ready='true';
+  })();
+  </script>
+</div>
+
+</body></html>

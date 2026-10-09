@@ -1,0 +1,11 @@
+{
+  "id": "instructional-source",
+  "version": "2.0.0",
+  "purpose": "Source-faithful, incrementally reviewable modeling of explanatory and instructional material",
+  "element_kinds": ["assertion", "action", "condition", "exception", "reason", "parameter", "example", "unresolved"],
+  "relation_types": ["conditions", "exception_to", "replaces", "supports", "precedes", "quantifies", "example_of", "qualifies"],
+  "origin_types": ["source_claim", "source_example", "project_interpretation", "unresolved"],
+  "modality_types": ["asserted", "recommended", "possible", "hypothetical", "negated", "unresolved"],
+  "information_statuses": ["modeled", "gap", "uncertain", "not_stated", "not_applicable"],
+  "rules": ["IS2-01", "IS2-02", "IS2-03", "IS2-04", "IS2-05", "IS2-06", "IS2-07", "IS2-08", "IS2-09"]
+}

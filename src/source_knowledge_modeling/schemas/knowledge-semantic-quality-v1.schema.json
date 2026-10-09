@@ -1,0 +1,138 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://source-knowledge-modeling.local/contracts/knowledge-semantic-quality/v1/schema.json",
+  "title": "Recomputable semantic quality report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "artifact_id",
+    "base_sha256",
+    "draft_sha256",
+    "profile_sha256",
+    "input_hashes",
+    "status",
+    "checks",
+    "gaps",
+    "reviewer",
+    "note",
+    "report_sha256"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "knowledge-semantic-quality/v1"
+    },
+    "artifact_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "base_sha256": {
+      "$ref": "#/$defs/sha"
+    },
+    "draft_sha256": {
+      "$ref": "#/$defs/sha"
+    },
+    "profile_sha256": {
+      "$ref": "#/$defs/sha"
+    },
+    "input_hashes": {
+      "type": "object",
+      "required": [
+        "inventory",
+        "discourse",
+        "semantic_assessment",
+        "guide",
+        "work_package"
+      ],
+      "additionalProperties": {
+        "$ref": "#/$defs/sha"
+      }
+    },
+    "status": {
+      "enum": [
+        "pass",
+        "partial",
+        "fail"
+      ]
+    },
+    "checks": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "category",
+          "status",
+          "detail"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "pass",
+              "fail"
+            ]
+          },
+          "detail": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "gaps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "status",
+          "meaning"
+        ]
+      }
+    },
+    "reviewer": {
+      "type": "object",
+      "required": [
+        "reviewer",
+        "reviewer_type",
+        "model",
+        "check_method",
+        "checked_at"
+      ]
+    },
+    "note": {
+      "type": "string"
+    },
+    "report_sha256": {
+      "$ref": "#/$defs/sha"
+    },
+    "reuse_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "certificate_sha256",
+        "plan_sha256"
+      ],
+      "properties": {
+        "certificate_sha256": {
+          "$ref": "#/$defs/sha"
+        },
+        "plan_sha256": {
+          "$ref": "#/$defs/sha"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "sha": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  }
+}

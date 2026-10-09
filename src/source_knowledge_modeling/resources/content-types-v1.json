@@ -1,0 +1,12 @@
+{
+  "schema_version": "semantic-content-types/v1",
+  "entries": [
+    {"id": "plan_process", "label": "方案/过程", "definition": "有顺序、步骤或执行安排的局部整体。", "positive_example": "借阅办理步骤。", "negative_example": "单一术语的定义。", "overlap": "可同时是案例或参数约束。"},
+    {"id": "concept_principle", "label": "概念/原理", "definition": "解释概念含义或一般机制的局部整体。", "positive_example": "何谓馆藏状态。", "negative_example": "某次借阅的记录。", "overlap": "可同时承担论证解释。"},
+    {"id": "parameter_constraint", "label": "参数/约束", "definition": "明确变量、数量、条件或适用边界的局部整体。", "positive_example": "借阅期限和适用条件。", "negative_example": "只列办理步骤而无参数。", "overlap": "可修饰方案过程。"},
+    {"id": "argument_explanation", "label": "论证/解释", "definition": "给出理由、依据或解释联系的局部整体。", "positive_example": "说明为何需要核验馆藏。", "negative_example": "只列物品清单。", "overlap": "可与概念原理共存。"},
+    {"id": "comparison", "label": "比较", "definition": "对两个或多个对象在明确维度上并置差异或共同点。", "positive_example": "纸本与电子借阅方式比较。", "negative_example": "两个相邻但未比较的段落。", "overlap": "可兼有案例。"},
+    {"id": "example", "label": "案例", "definition": "明确受限定的实例、演示或具体情境。", "positive_example": "一次虚构借阅演示。", "negative_example": "一般规则。", "overlap": "可展示方案过程或参数约束。"}
+  ],
+  "unknown_handling": "无法归类时保持候选待核，不自造类别，不把阅读角色当类别。"
+}

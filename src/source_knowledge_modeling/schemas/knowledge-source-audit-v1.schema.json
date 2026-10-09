@@ -1,0 +1,184 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://source-knowledge-modeling.local/contracts/knowledge-source-audit/v1/schema.json",
+  "title": "Source-only information or discourse inventory",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "source_sha256",
+    "snapshot_sha256",
+    "reviewer",
+    "checked_at",
+    "items"
+  ],
+  "properties": {
+    "schema_version": {
+      "enum": [
+        "knowledge-source-information/v1",
+        "knowledge-discourse-audit/v1"
+      ]
+    },
+    "source_sha256": {
+      "$ref": "#/$defs/sha"
+    },
+    "snapshot_sha256": {
+      "$ref": "#/$defs/sha"
+    },
+    "reviewer": {
+      "type": "string",
+      "minLength": 1
+    },
+    "checked_at": {
+      "type": "string",
+      "minLength": 1
+    },
+    "items": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "meaning",
+          "status",
+          "critical",
+          "anchors",
+          "reason"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "meaning": {
+            "type": "string",
+            "minLength": 1
+          },
+          "status": {
+            "enum": [
+              "required",
+              "uncertain",
+              "not_stated",
+              "not_applicable"
+            ]
+          },
+          "critical": {
+            "type": "boolean"
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1
+          },
+          "anchors": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "locator",
+                "quote"
+              ],
+              "properties": {
+                "locator": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "quote": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "start": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "end": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              }
+            }
+          },
+          "regions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/region"
+            }
+          }
+        },
+        "anyOf": [
+          {
+            "properties": {
+              "anchors": {
+                "minItems": 1
+              }
+            },
+            "required": [
+              "anchors"
+            ]
+          },
+          {
+            "properties": {
+              "regions": {
+                "minItems": 1
+              }
+            },
+            "required": [
+              "regions"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "$defs": {
+    "sha": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "region": {
+      "type": "object",
+      "required": [
+        "locator",
+        "bbox",
+        "native_kind",
+        "native_structure_sha256",
+        "interpretation_status",
+        "note"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "locator": {
+          "type": "string",
+          "minLength": 1
+        },
+        "bbox": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "items": {
+            "type": "number"
+          }
+        },
+        "native_kind": {
+          "enum": [
+            "chart",
+            "table",
+            "image"
+          ]
+        },
+        "native_structure_sha256": {
+          "$ref": "#/$defs/sha"
+        },
+        "interpretation_status": {
+          "enum": [
+            "interpreted",
+            "unresolved"
+          ]
+        },
+        "note": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

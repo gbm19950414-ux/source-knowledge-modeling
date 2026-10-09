@@ -1,0 +1,311 @@
+{
+  "artifact_id": "synthetic-community-garden",
+  "artifact_revision_id": "base",
+  "artifact_schema_version": "knowledge-semantic-projection/v3",
+  "discourse": [],
+  "elements": [
+    {
+      "anchors": [
+        {
+          "end": 17,
+          "locator": "line:2",
+          "quote": "每周六，协调员查看每块苗床的表土。",
+          "start": 0
+        }
+      ],
+      "content_revision": "e1855ccf8d352e7e2134b50d62542c93e1bf25fe95ba759f1a14c0cf8efa8036",
+      "context_ids": [],
+      "example_scope": null,
+      "id": "check",
+      "kind": "action",
+      "legacy_review_package_id": null,
+      "modality": "asserted",
+      "negated": false,
+      "origin_type": "source_claim",
+      "review_id": "synthetic-review",
+      "review_state": "accepted",
+      "source_check_ids": [
+        "synthetic-check"
+      ],
+      "text": "每周六，协调员查看每块苗床的表土。"
+    },
+    {
+      "anchors": [
+        {
+          "end": 17,
+          "locator": "line:3",
+          "quote": "若表土干燥且未来六小时没有降雨预报",
+          "start": 0
+        }
+      ],
+      "content_revision": "b087fbe6db53a36add20cb1732dce35f89991e57258f69d8344f461c1a96297f",
+      "context_ids": [],
+      "example_scope": null,
+      "id": "dry",
+      "kind": "condition",
+      "legacy_review_package_id": null,
+      "modality": "asserted",
+      "negated": false,
+      "origin_type": "source_claim",
+      "review_id": "synthetic-review",
+      "review_state": "accepted",
+      "source_check_ids": [
+        "synthetic-check"
+      ],
+      "text": "表土干燥且未来六小时没有降雨预报"
+    },
+    {
+      "anchors": [
+        {
+          "end": 23,
+          "locator": "line:3",
+          "quote": "志愿者浇水",
+          "start": 18
+        }
+      ],
+      "content_revision": "996111e857ef78d0ae9c1566f6ef5b5f8dc1f6b5f175f1c33c255411e1455520",
+      "context_ids": [],
+      "example_scope": null,
+      "id": "water",
+      "kind": "action",
+      "legacy_review_package_id": null,
+      "modality": "asserted",
+      "negated": false,
+      "origin_type": "source_claim",
+      "review_id": "synthetic-review",
+      "review_state": "accepted",
+      "source_check_ids": [
+        "synthetic-check"
+      ],
+      "text": "志愿者浇水"
+    },
+    {
+      "anchors": [
+        {
+          "end": 13,
+          "locator": "line:5",
+          "quote": "没有给出单次浇水量",
+          "start": 4
+        }
+      ],
+      "content_revision": "fde116c79daedf9d08cf60ed1aa5ea39c44224f89e40f13f4a6173cacc7e892d",
+      "context_ids": [],
+      "example_scope": null,
+      "id": "unknown-volume",
+      "kind": "unresolved",
+      "legacy_review_package_id": null,
+      "modality": "asserted",
+      "negated": true,
+      "origin_type": "source_claim",
+      "review_id": "synthetic-review",
+      "review_state": "accepted",
+      "source_check_ids": [
+        "synthetic-check"
+      ],
+      "text": "说明没有给出单次浇水量"
+    }
+  ],
+  "information": [],
+  "lineage": [],
+  "occurrences": [
+    {
+      "element_id": "check",
+      "end": 17,
+      "id": "occ:check",
+      "locator": "line:2",
+      "start": 0
+    },
+    {
+      "element_id": "dry",
+      "end": 17,
+      "id": "occ:dry",
+      "locator": "line:3",
+      "start": 0
+    },
+    {
+      "element_id": "water",
+      "end": 23,
+      "id": "occ:water",
+      "locator": "line:3",
+      "start": 18
+    },
+    {
+      "element_id": "unknown-volume",
+      "end": 13,
+      "id": "occ:unknown-volume",
+      "locator": "line:5",
+      "start": 4
+    }
+  ],
+  "packages": [
+    {
+      "context_ids": [],
+      "element_ids": [
+        "check",
+        "dry",
+        "water"
+      ],
+      "id": "watering",
+      "legacy_review": null,
+      "modality": "asserted",
+      "origin_type": "source_claim",
+      "relation_ids": [
+        "dry-conditions-water"
+      ],
+      "summary": "检查与浇水"
+    },
+    {
+      "context_ids": [],
+      "element_ids": [
+        "unknown-volume"
+      ],
+      "id": "limits",
+      "legacy_review": null,
+      "modality": "asserted",
+      "origin_type": "source_claim",
+      "relation_ids": [],
+      "summary": "资料边界"
+    }
+  ],
+  "producer": {
+    "commit_or_release": "synthetic-contract-fixture",
+    "name": "source-knowledge-modeling"
+  },
+  "profile": {
+    "definition_sha256": "e704d2a4957ab1b1a539cf69e8297452338f29e17b45202d5e484c44475c8096",
+    "id": "instructional-source",
+    "version": "3.0.0"
+  },
+  "relations": [
+    {
+      "anchors": [
+        {
+          "end": 17,
+          "locator": "line:3",
+          "quote": "若表土干燥且未来六小时没有降雨预报",
+          "start": 0
+        },
+        {
+          "end": 23,
+          "locator": "line:3",
+          "quote": "志愿者浇水",
+          "start": 18
+        }
+      ],
+      "basis": "explicit",
+      "content_revision": "9b439719911d6bd1c2d577087689fcf91cb5921bd5719403d6d7671f08af7f56",
+      "context_ids": [],
+      "from_id": "dry",
+      "from_revision": "b087fbe6db53a36add20cb1732dce35f89991e57258f69d8344f461c1a96297f",
+      "id": "dry-conditions-water",
+      "legacy_review_package_id": null,
+      "note": "合取条件约束浇水动作，不是因果。",
+      "origin_type": "source_claim",
+      "premises": [],
+      "rationale": "",
+      "review_id": "synthetic-review",
+      "review_state": "accepted",
+      "source_check_ids": [
+        "synthetic-check"
+      ],
+      "to_id": "water",
+      "to_revision": "996111e857ef78d0ae9c1566f6ef5b5f8dc1f6b5f175f1c33c255411e1455520",
+      "type": "conditions",
+      "uncertainty": ""
+    }
+  ],
+  "reviews": [
+    {
+      "base_revision_id": "base",
+      "check_method": "source_text",
+      "checked_anchor_keys": [
+        "577fe1d509e8bbae8307b98b11b2eedec0d60194e750f0decc1a90e7f0cab234",
+        "9939fea7d9568d61dd9f3b5f4abec503f972b5b32da347c64968a4d17f73780e",
+        "c78722b85f3541e76dbfa9ec490316d2dab2802a8cc7a1ea4bb5443f88aef8d4",
+        "e53056ab0767c82a2c28e76cbae676b73cc1cb27e50f4092abf4caec91468a3c"
+      ],
+      "decision": "accept",
+      "dependency_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "id": "synthetic-review",
+      "note": "Synthetic expected review, not a real review event.",
+      "proposal_id": "synthetic",
+      "proposal_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "quality_report_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "reviewed_at": "2026-09-27T00:00:00Z",
+      "reviewer": "synthetic contract fixture",
+      "rule_ids": [
+        "IS3-01"
+      ]
+    }
+  ],
+  "schema_version": "source-knowledge-export/v4",
+  "scope": {
+    "description": "Synthetic community garden discourse example",
+    "included_locators": [
+      "line:2",
+      "line:3",
+      "line:5"
+    ]
+  },
+  "screening": [
+    {
+      "locator": "line:2",
+      "reason": "Awaiting source-first audit.",
+      "status": "unmodeled"
+    },
+    {
+      "locator": "line:3",
+      "reason": "Awaiting source-first audit.",
+      "status": "unmodeled"
+    },
+    {
+      "locator": "line:5",
+      "reason": "Awaiting source-first audit.",
+      "status": "unmodeled"
+    }
+  ],
+  "source": {
+    "id": "synthetic-community-garden-text",
+    "kind": "synthetic_text",
+    "path": "contracts/knowledge-foundation/v1/examples/community-garden.txt",
+    "sha256": "90b279d44bdb0460ae61bc0022a3e3bb7b539cbab0acdbf07f98cd524b8b6dd4",
+    "snapshot_path": "contracts/knowledge-foundation/v1/examples/community-garden.snapshot.json",
+    "snapshot_sha256": "751e725e1b0c174e5c742389bf06175ebcade599660264c344f2bb1ce8d7d42f",
+    "title": "社区花园浇水说明（自编合成）",
+    "transcription_method": "逐行直接转写"
+  },
+  "source_checks": [
+    {
+      "anchor_keys": [
+        "577fe1d509e8bbae8307b98b11b2eedec0d60194e750f0decc1a90e7f0cab234",
+        "9939fea7d9568d61dd9f3b5f4abec503f972b5b32da347c64968a4d17f73780e",
+        "c78722b85f3541e76dbfa9ec490316d2dab2802a8cc7a1ea4bb5443f88aef8d4",
+        "e53056ab0767c82a2c28e76cbae676b73cc1cb27e50f4092abf4caec91468a3c"
+      ],
+      "check_method": "source_text",
+      "checked_at": "2026-09-27T00:00:00Z",
+      "id": "synthetic-check",
+      "note": "Synthetic fixture for tool tests, no human review claimed.",
+      "reviewer": "synthetic contract fixture",
+      "snapshot_sha256": "751e725e1b0c174e5c742389bf06175ebcade599660264c344f2bb1ce8d7d42f",
+      "source_sha256": "90b279d44bdb0460ae61bc0022a3e3bb7b539cbab0acdbf07f98cd524b8b6dd4"
+    }
+  ],
+  "source_units": [
+    {
+      "locator": "line:2",
+      "order": 1,
+      "scope_role": "primary"
+    },
+    {
+      "locator": "line:3",
+      "order": 2,
+      "scope_role": "primary"
+    },
+    {
+      "locator": "line:5",
+      "order": 4,
+      "scope_role": "primary"
+    }
+  ]
+}

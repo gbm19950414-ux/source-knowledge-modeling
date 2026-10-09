@@ -1,0 +1,10 @@
+{
+  "id": "instructional-source",
+  "version": "1.0.0",
+  "purpose": "Source-faithful modeling of explanatory and instructional material",
+  "element_kinds": ["assertion", "action", "condition", "exception", "reason", "parameter", "example", "unresolved"],
+  "relation_types": ["conditions", "exception_to", "replaces", "supports", "precedes", "quantifies", "example_of", "qualifies"],
+  "origin_types": ["source_claim", "source_example", "project_interpretation", "unresolved"],
+  "modality_types": ["asserted", "recommended", "possible", "hypothetical", "negated", "unresolved"],
+  "screening_statuses": ["modeled", "partial", "unmodeled", "uncertain", "not_applicable"]
+}

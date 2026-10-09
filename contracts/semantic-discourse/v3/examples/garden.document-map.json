@@ -1,0 +1,58 @@
+{
+  "containers": [
+    {
+      "evidence": [],
+      "id": "chapter:garden",
+      "kind": "chapter",
+      "order": 0,
+      "parent_id": null,
+      "title": "Synthetic garden"
+    },
+    {
+      "evidence": [],
+      "id": "section:garden",
+      "kind": "section",
+      "order": 1,
+      "parent_id": "chapter:garden",
+      "range": {
+        "end": {
+          "offset": 28,
+          "paragraph_id": "line:5"
+        },
+        "start": {
+          "offset": 0,
+          "paragraph_id": "line:2"
+        }
+      },
+      "title": "Watering"
+    }
+  ],
+  "edge_routes": [],
+  "occurrences": [],
+  "paragraphs": [
+    {
+      "evidence": [],
+      "id": "line:2",
+      "locator": "line:2",
+      "order": 0,
+      "text": "每周六，协调员查看每块苗床的表土。"
+    },
+    {
+      "evidence": [],
+      "id": "line:3",
+      "locator": "line:3",
+      "order": 1,
+      "text": "若表土干燥且未来六小时没有降雨预报，志愿者浇水。"
+    },
+    {
+      "evidence": [],
+      "id": "line:5",
+      "locator": "line:5",
+      "order": 2,
+      "text": "这份说明没有给出单次浇水量，也没有证明浇水导致植株生长。"
+    }
+  ],
+  "root_id": "chapter:garden",
+  "schema_version": "source-reading-map/v1",
+  "title": "Synthetic garden"
+}

@@ -1,0 +1,224 @@
+{
+  "author": "synthetic author",
+  "blocks": [
+    {
+      "element_ids": [
+        "check"
+      ],
+      "id": "b-check",
+      "order": 0,
+      "summary": [
+        {
+          "id": "s-check",
+          "origin": "source",
+          "refs": [
+            {
+              "field_path": "/text",
+              "object_id": "check"
+            }
+          ],
+          "text": "每周六，协调员查看每块苗床的表土。"
+        }
+      ],
+      "title": "定期查看",
+      "topic_id": "t-water"
+    },
+    {
+      "element_ids": [
+        "dry"
+      ],
+      "id": "b-condition",
+      "order": 1,
+      "summary": [
+        {
+          "id": "s-condition",
+          "origin": "source",
+          "refs": [
+            {
+              "field_path": "/text",
+              "object_id": "dry"
+            }
+          ],
+          "text": "表土干燥且未来六小时没有降雨预报"
+        }
+      ],
+      "title": "判断浇水条件",
+      "topic_id": "t-water"
+    },
+    {
+      "element_ids": [
+        "water"
+      ],
+      "id": "b-water",
+      "order": 2,
+      "related_element_ids": [
+        "dry",
+        "unknown-volume"
+      ],
+      "summary": [
+        {
+          "id": "s-water",
+          "origin": "source",
+          "refs": [
+            {
+              "field_path": "/text",
+              "object_id": "dry"
+            },
+            {
+              "field_path": "/text",
+              "object_id": "water"
+            }
+          ],
+          "text": "表土干燥且未来六小时没有降雨预报时，志愿者浇水。"
+        }
+      ],
+      "title": "条件满足时浇水",
+      "topic_id": "t-water"
+    },
+    {
+      "element_ids": [
+        "unknown-volume"
+      ],
+      "id": "b-limits",
+      "order": 0,
+      "summary": [
+        {
+          "id": "s-limits",
+          "origin": "source",
+          "refs": [
+            {
+              "field_path": "/text",
+              "object_id": "unknown-volume"
+            }
+          ],
+          "text": "说明没有给出单次浇水量"
+        }
+      ],
+      "title": "单次用量未给出",
+      "topic_id": "t-limits"
+    }
+  ],
+  "chapter": {
+    "id": "garden",
+    "summary": [
+      {
+        "id": "s-garden",
+        "origin": "interpretation",
+        "rationale": "把资料中的检查、条件与动作作为阅读路径。",
+        "refs": [
+          {
+            "field_path": "/text",
+            "object_id": "check"
+          },
+          {
+            "field_path": "/text",
+            "object_id": "dry"
+          },
+          {
+            "field_path": "/text",
+            "object_id": "water"
+          },
+          {
+            "field_path": "/text",
+            "object_id": "unknown-volume"
+          }
+        ],
+        "text": "可以按检查、条件与动作逐步审阅，并保留未给出的用量。",
+        "uncertainty": "阅读组织不构成原文明确执行顺序或科学因果。"
+      }
+    ],
+    "title": "社区花园：何时浇水与资料边界"
+  },
+  "edges": [
+    {
+      "direction": "directed",
+      "from_id": "b-condition",
+      "id": "edge-condition",
+      "label": "仅该条件约束该动作",
+      "origin": "source",
+      "premises": [
+        {
+          "field_path": "/note",
+          "object_id": "dry-conditions-water"
+        }
+      ],
+      "rationale": "",
+      "scope_note": "只对 dry→water 条件关系作聚合，不扩展到所有要素。",
+      "source_relation_ids": [
+        "dry-conditions-water"
+      ],
+      "to_id": "b-water",
+      "uncertainty": ""
+    },
+    {
+      "direction": "directed",
+      "from_id": "b-check",
+      "id": "edge-reading",
+      "label": "阅读时先看观察再看条件",
+      "origin": "interpretation",
+      "premises": [
+        {
+          "field_path": "/text",
+          "object_id": "check"
+        },
+        {
+          "field_path": "/text",
+          "object_id": "dry"
+        }
+      ],
+      "rationale": "观察与条件同属浇水说明，便于审阅。",
+      "scope_note": "阅读组织建议。",
+      "source_relation_ids": [],
+      "to_id": "b-condition",
+      "uncertainty": "不是作者明确表述的因果关系或新的执行要求。"
+    }
+  ],
+  "schema_version": "semantic-discourse-draft/v1",
+  "source_sha256": "2712ae99c512cc8944258ce47d618523221c3ee58f22732d28a8949aea0e7620",
+  "topics": [
+    {
+      "id": "t-water",
+      "order": 0,
+      "package_id": "watering",
+      "role": "mainline",
+      "summary": [
+        {
+          "id": "s-t-water",
+          "origin": "source",
+          "refs": [
+            {
+              "field_path": "/text",
+              "object_id": "dry"
+            },
+            {
+              "field_path": "/text",
+              "object_id": "water"
+            }
+          ],
+          "text": "只有满足干燥及未来六小时无雨预报的条件时，才使用这一浇水说明。"
+        }
+      ],
+      "title": "何时浇水"
+    },
+    {
+      "id": "t-limits",
+      "order": 1,
+      "package_id": "limits",
+      "role": "supporting",
+      "summary": [
+        {
+          "id": "s-t-limits",
+          "origin": "source",
+          "refs": [
+            {
+              "field_path": "/text",
+              "object_id": "unknown-volume"
+            }
+          ],
+          "text": "说明没有给出单次浇水量"
+        }
+      ],
+      "title": "资料没有规定什么"
+    }
+  ]
+}

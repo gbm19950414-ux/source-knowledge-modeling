@@ -1,0 +1,1058 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://source-knowledge-modeling.local/contracts/knowledge-semantic-projection/v3/schema.json",
+  "title": "Source-linked semantic projection v3",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "artifact_id",
+    "revision",
+    "profile",
+    "source",
+    "legacy",
+    "scope",
+    "screening",
+    "information",
+    "elements",
+    "relations",
+    "packages",
+    "source_checks",
+    "reviews",
+    "lineage",
+    "source_units",
+    "occurrences",
+    "discourse"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "knowledge-semantic-projection/v3"
+    },
+    "artifact_id": {
+      "$ref": "#/$defs/id"
+    },
+    "revision": {
+      "type": "object",
+      "required": [
+        "id",
+        "parent_id",
+        "note"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "parent_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "note": {
+          "type": "string"
+        }
+      }
+    },
+    "profile": {
+      "type": "object",
+      "required": [
+        "id",
+        "version",
+        "definition_sha256"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "version": {
+          "type": "string"
+        },
+        "definition_sha256": {
+          "$ref": "#/$defs/sha"
+        }
+      }
+    },
+    "source": {
+      "type": "object",
+      "required": [
+        "id",
+        "kind",
+        "title",
+        "path",
+        "sha256",
+        "snapshot_path",
+        "snapshot_sha256"
+      ],
+      "additionalProperties": true
+    },
+    "legacy": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": [
+            "schema_version",
+            "artifact_id",
+            "revision_id",
+            "sha256"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "schema_version": {
+              "type": "string"
+            },
+            "artifact_id": {
+              "$ref": "#/$defs/id"
+            },
+            "revision_id": {
+              "$ref": "#/$defs/id"
+            },
+            "sha256": {
+              "$ref": "#/$defs/sha"
+            },
+            "review_history": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "scope": {
+      "type": "object",
+      "required": [
+        "included_locators",
+        "description"
+      ],
+      "additionalProperties": true
+    },
+    "screening": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "locator",
+          "status",
+          "reason"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "locator": {
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "modeled",
+              "partial",
+              "unmodeled",
+              "uncertain",
+              "not_applicable"
+            ]
+          },
+          "reason": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "information": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/audit_item"
+      }
+    },
+    "elements": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/element"
+      }
+    },
+    "relations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/relation"
+      }
+    },
+    "packages": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/package"
+      }
+    },
+    "source_checks": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/source_check"
+      }
+    },
+    "reviews": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/review"
+      }
+    },
+    "lineage": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/lineage"
+      }
+    },
+    "source_units": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/source_unit"
+      }
+    },
+    "occurrences": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/occurrence"
+      }
+    },
+    "discourse": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/audit_item"
+      }
+    }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+    },
+    "sha": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "anchor": {
+      "type": "object",
+      "required": [
+        "locator",
+        "start",
+        "end",
+        "quote"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "locator": {
+          "type": "string",
+          "minLength": 1
+        },
+        "start": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "end": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "quote": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "region": {
+      "type": "object",
+      "required": [
+        "locator",
+        "bbox",
+        "native_kind",
+        "native_structure_sha256",
+        "interpretation_status",
+        "note"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "locator": {
+          "type": "string",
+          "minLength": 1
+        },
+        "bbox": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "items": {
+            "type": "number"
+          }
+        },
+        "native_kind": {
+          "enum": [
+            "chart",
+            "table",
+            "image"
+          ]
+        },
+        "native_structure_sha256": {
+          "$ref": "#/$defs/sha"
+        },
+        "interpretation_status": {
+          "enum": [
+            "interpreted",
+            "unresolved"
+          ]
+        },
+        "note": {
+          "type": "string"
+        }
+      }
+    },
+    "quantity": {
+      "type": "object",
+      "required": [
+        "amount",
+        "unit",
+        "basis",
+        "scope"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "amount": {
+          "type": "string",
+          "minLength": 1
+        },
+        "unit": {
+          "type": "string",
+          "minLength": 1
+        },
+        "basis": {
+          "type": "string",
+          "minLength": 1
+        },
+        "scope": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "object_common": {
+      "type": "object",
+      "required": [
+        "id",
+        "content_revision",
+        "anchors",
+        "context_ids",
+        "source_check_ids",
+        "review_state",
+        "review_id",
+        "legacy_review_package_id"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "content_revision": {
+          "$ref": "#/$defs/sha"
+        },
+        "anchors": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/anchor"
+          }
+        },
+        "regions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/region"
+          }
+        },
+        "context_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/id"
+          }
+        },
+        "source_check_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/id"
+          }
+        },
+        "review_state": {
+          "enum": [
+            "accepted",
+            "legacy_historical",
+            "pending_semantic"
+          ]
+        },
+        "review_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "legacy_review_package_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "prior_review_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "element": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/object_common"
+        },
+        {
+          "type": "object",
+          "required": [
+            "kind",
+            "text",
+            "origin_type",
+            "modality",
+            "negated",
+            "example_scope"
+          ],
+          "properties": {
+            "kind": {
+              "enum": [
+                "assertion",
+                "action",
+                "condition",
+                "exception",
+                "reason",
+                "parameter",
+                "example",
+                "unresolved"
+              ]
+            },
+            "text": {
+              "type": "string",
+              "minLength": 1
+            },
+            "origin_type": {
+              "enum": [
+                "source_claim",
+                "source_example",
+                "project_interpretation",
+                "unresolved"
+              ]
+            },
+            "modality": {
+              "enum": [
+                "asserted",
+                "recommended",
+                "possible",
+                "hypothetical",
+                "negated",
+                "unresolved"
+              ]
+            },
+            "negated": {
+              "type": "boolean"
+            },
+            "example_scope": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "quantity": {
+              "$ref": "#/$defs/quantity"
+            },
+            "legacy_fields": {
+              "type": "object",
+              "description": "Frozen v1/v2 field values retained as historical provenance, not new v3 acceptance."
+            }
+          }
+        }
+      ]
+    },
+    "relation": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/object_common"
+        },
+        {
+          "type": "object",
+          "required": [
+            "type",
+            "from_id",
+            "to_id",
+            "from_revision",
+            "to_revision",
+            "note",
+            "origin_type",
+            "basis",
+            "premises",
+            "rationale",
+            "uncertainty"
+          ],
+          "properties": {
+            "type": {
+              "enum": [
+                "conditions",
+                "exception_to",
+                "replaces",
+                "supports",
+                "precedes",
+                "quantifies",
+                "example_of",
+                "qualifies",
+                "causes",
+                "contrasts_with",
+                "elaborates"
+              ]
+            },
+            "from_id": {
+              "$ref": "#/$defs/id"
+            },
+            "to_id": {
+              "$ref": "#/$defs/id"
+            },
+            "from_revision": {
+              "$ref": "#/$defs/sha"
+            },
+            "to_revision": {
+              "$ref": "#/$defs/sha"
+            },
+            "note": {
+              "type": "string"
+            },
+            "origin_type": {
+              "enum": [
+                "source_claim",
+                "source_example",
+                "project_interpretation",
+                "unresolved"
+              ]
+            },
+            "basis": {
+              "enum": [
+                "explicit",
+                "inferred_from_source",
+                "project_interpretation",
+                "unresolved"
+              ]
+            },
+            "premises": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "$ref": "#/$defs/id"
+              }
+            },
+            "rationale": {
+              "type": "string"
+            },
+            "uncertainty": {
+              "type": "string"
+            },
+            "legacy_fields": {
+              "type": "object",
+              "description": "Frozen v1/v2 field values retained as historical provenance, not new v3 acceptance."
+            }
+          }
+        }
+      ]
+    },
+    "package": {
+      "type": "object",
+      "required": [
+        "id",
+        "summary",
+        "origin_type",
+        "modality",
+        "element_ids",
+        "relation_ids",
+        "context_ids",
+        "legacy_review"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "origin_type": {
+          "enum": [
+            "source_claim",
+            "source_example",
+            "project_interpretation",
+            "unresolved"
+          ]
+        },
+        "modality": {
+          "enum": [
+            "asserted",
+            "recommended",
+            "possible",
+            "hypothetical",
+            "negated",
+            "unresolved"
+          ]
+        },
+        "element_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/id"
+          }
+        },
+        "relation_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/id"
+          }
+        },
+        "context_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/id"
+          }
+        },
+        "legacy_review": {
+          "type": [
+            "object",
+            "null"
+          ]
+        }
+      }
+    },
+    "information": {
+      "type": "object",
+      "required": [
+        "id",
+        "locator",
+        "start",
+        "end",
+        "meaning",
+        "status",
+        "model_refs",
+        "reason"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "locator": {
+          "type": "string"
+        },
+        "start": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "end": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "meaning": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "enum": [
+            "modeled",
+            "gap",
+            "uncertain",
+            "not_stated",
+            "not_applicable"
+          ]
+        },
+        "checked_scope": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "model_refs": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/id"
+          }
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "source_check": {
+      "type": "object",
+      "required": [
+        "id",
+        "source_sha256",
+        "snapshot_sha256",
+        "anchor_keys",
+        "check_method",
+        "reviewer",
+        "checked_at",
+        "note"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "source_sha256": {
+          "$ref": "#/$defs/sha"
+        },
+        "snapshot_sha256": {
+          "$ref": "#/$defs/sha"
+        },
+        "anchor_keys": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/sha"
+          }
+        },
+        "region_keys": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/sha"
+          }
+        },
+        "check_method": {
+          "enum": [
+            "original_visual",
+            "source_text"
+          ]
+        },
+        "reviewer": {
+          "type": "string",
+          "minLength": 1
+        },
+        "checked_at": {
+          "type": "string",
+          "minLength": 1
+        },
+        "note": {
+          "type": "string"
+        }
+      }
+    },
+    "review": {
+      "type": "object",
+      "required": [
+        "id",
+        "proposal_id",
+        "proposal_sha256",
+        "base_revision_id",
+        "decision",
+        "reviewer",
+        "check_method",
+        "checked_anchor_keys",
+        "dependency_sha256",
+        "rule_ids",
+        "reviewed_at",
+        "note",
+        "quality_report_sha256"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "proposal_id": {
+          "$ref": "#/$defs/id"
+        },
+        "proposal_sha256": {
+          "$ref": "#/$defs/sha"
+        },
+        "base_revision_id": {
+          "$ref": "#/$defs/id"
+        },
+        "decision": {
+          "const": "accept"
+        },
+        "reviewer": {
+          "type": "string",
+          "minLength": 1
+        },
+        "check_method": {
+          "enum": [
+            "original_visual",
+            "source_text"
+          ]
+        },
+        "checked_anchor_keys": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/sha"
+          }
+        },
+        "checked_region_keys": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/sha"
+          }
+        },
+        "dependency_sha256": {
+          "$ref": "#/$defs/sha"
+        },
+        "rule_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/id"
+          }
+        },
+        "reviewed_at": {
+          "type": "string",
+          "minLength": 1
+        },
+        "note": {
+          "type": "string"
+        },
+        "quality_report_sha256": {
+          "$ref": "#/$defs/sha"
+        }
+      }
+    },
+    "lineage": {
+      "type": "object",
+      "required": [
+        "old_kind",
+        "old_id",
+        "new_kind",
+        "new_ids",
+        "change",
+        "reason"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "old_kind": {
+          "enum": [
+            "statement",
+            "package",
+            "element",
+            "relation"
+          ]
+        },
+        "old_id": {
+          "$ref": "#/$defs/id"
+        },
+        "new_kind": {
+          "enum": [
+            "package",
+            "element",
+            "relation"
+          ]
+        },
+        "new_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/id"
+          }
+        },
+        "change": {
+          "enum": [
+            "migrated",
+            "split",
+            "merged",
+            "replaced",
+            "retired"
+          ]
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "source_unit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "locator",
+        "order",
+        "scope_role"
+      ],
+      "properties": {
+        "locator": {
+          "type": "string",
+          "minLength": 1
+        },
+        "order": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "scope_role": {
+          "enum": [
+            "primary",
+            "context"
+          ]
+        }
+      }
+    },
+    "occurrence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "element_id",
+        "locator",
+        "start",
+        "end"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "element_id": {
+          "$ref": "#/$defs/id"
+        },
+        "locator": {
+          "type": "string",
+          "minLength": 1
+        },
+        "start": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "end": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "object_id",
+        "content_revision",
+        "field_path"
+      ],
+      "properties": {
+        "object_id": {
+          "$ref": "#/$defs/id"
+        },
+        "content_revision": {
+          "$ref": "#/$defs/sha"
+        },
+        "field_path": {
+          "type": "string",
+          "pattern": "^/"
+        }
+      }
+    },
+    "audit_item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "locator",
+        "meaning",
+        "status",
+        "bindings",
+        "reason"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "locator": {
+          "type": "string",
+          "minLength": 1
+        },
+        "start": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "end": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "meaning": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "enum": [
+            "modeled",
+            "gap",
+            "uncertain",
+            "not_stated",
+            "not_applicable"
+          ]
+        },
+        "bindings": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/binding"
+          }
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "checked_scope": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "region": {
+          "$ref": "#/$defs/region"
+        }
+      },
+      "oneOf": [
+        {
+          "required": [
+            "start",
+            "end"
+          ],
+          "not": {
+            "required": [
+              "region"
+            ]
+          }
+        },
+        {
+          "required": [
+            "region"
+          ],
+          "not": {
+            "anyOf": [
+              {
+                "required": [
+                  "start"
+                ]
+              },
+              {
+                "required": [
+                  "end"
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

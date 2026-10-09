@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://source-knowledge-modeling.local/contracts/knowledge-semantic-expectations/v1/schema.json",
+  "title": "Frozen semantic expectation probes",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "cases"],
+  "properties": {
+    "schema_version": {"const": "knowledge-semantic-expectations/v1"},
+    "source_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "cases": {"type": "array", "minItems": 1, "items": {"type": "object", "additionalProperties": false,
+      "required": ["id", "collection"],
+      "properties": {"id": {"type": "string", "minLength": 1}, "collection": {"enum": ["elements", "relations", "information", "discourse"]},
+        "where": {"type": "object"}, "min_count": {"type": "integer", "minimum": 0}, "max_count": {"type": "integer", "minimum": 0}, "meaning": {"type": "string"},
+        "require": {"type": "array", "items": {"type": "object", "additionalProperties": false, "required": ["path"],
+          "properties": {"path": {"type": "string", "pattern": "^/"}, "equals": {}, "not_equals": {}, "contains": {},
+            "contains_any": {"type": "array", "minItems": 1}, "match": {"enum": ["any", "all"]}}}}}}
+  }
+  }
+}
